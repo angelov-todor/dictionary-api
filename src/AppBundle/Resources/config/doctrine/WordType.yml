@@ -1,0 +1,10 @@
+WordType:
+  type: entity
+  id:
+    id:
+      column: id
+      type: int
+  table: word
+  fields:
+    name:
+      type: string

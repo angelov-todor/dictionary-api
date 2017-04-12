@@ -1,0 +1,40 @@
+AppBundle\Entity\Word:
+  collectionOperations:
+    get:
+      method: 'GET' # nothing more to add if we want to keep the default controller
+  itemOperations:
+    get:
+      method: 'GET'
+    rhymeform:
+      route_name: 'rhymeform'
+  attributes:
+    filters: [word.search]
+
+AppBundle\Entity\WordType:
+  collectionOperations:
+    get:
+      method: 'GET' # nothing more to add if we want to keep the default controller
+  itemOperations:
+    get:
+      method: 'GET'
+
+#AppBundle\Entity\Rhymeform:
+#  itemOperations:
+#    get:
+#      method: 'GET'
+
+AppBundle\Entity\IncorrectForm:
+  collectionOperations:
+    get:
+      method: 'GET' # nothing more to add if we want to keep the default controller
+  itemOperations:
+    get:
+      method: 'GET'
+
+AppBundle\Entity\DerivativeForm:
+  collectionOperations:
+    get:
+      method: 'GET' # nothing more to add if we want to keep the default controller
+  itemOperations:
+    get:
+      method: 'GET'

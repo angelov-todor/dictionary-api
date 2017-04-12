@@ -1,0 +1,58 @@
+<?php
+declare(strict_types=1);
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * A book.
+ *
+ * @ORM\Entity
+ */
+class Book
+{
+    /**
+     * @var int The id of this book.
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @var string|null The ISBN number of this book (or null if doesn't have one).
+     *
+     * @ORM\Column(nullable=true)
+     */
+    private $isbn;
+
+    /**
+     * @var string The title of this book.
+     *
+     * @ORM\Column
+     */
+    private $title;
+
+    /**
+     * @var string The description of this book.
+     *
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @var string The author of this book.
+     *
+     * @ORM\Column
+     */
+    private $author;
+
+    /**
+     * @var \DateTimeInterface The publication date of this book.
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $publicationDate;
+}

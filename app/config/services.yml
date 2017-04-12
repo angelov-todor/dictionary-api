@@ -1,0 +1,24 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+#services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+services:
+  offer.search_filter:
+    parent:    'api_platform.doctrine.orm.search_filter'
+    arguments: [ { name: 'partial' } ]
+    tags:      [ { name: 'api_platform.filter', id: 'word.search' } ]
+
+  rhymeform.item_data_provider:
+    class: 'AppBundle\DataProvider\RhymeformDataProvider'
+    public: false
+    tags:
+      -  { name: 'api_platform.item_data_provider' }
+
+  'AppBundle\Action\UserAction':
+    class: 'AppBundle\Action\UserAction'
+    arguments: [ '@service_container']
