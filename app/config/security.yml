@@ -4,9 +4,9 @@ security:
     encoders:
       FOS\UserBundle\Model\UserInterface: bcrypt
 
-    role_hierarchy:
-      ROLE_READER: ROLE_USER
-      ROLE_ADMIN: ROLE_READER
+#    role_hierarchy:
+#      ROLE_READER: ROLE_USER
+#      ROLE_ADMIN: ROLE_READER
 
 #    providers:
 #        in_memory:
@@ -32,4 +32,5 @@ security:
     access_control:
       - { path: ^/authenticate, method: POST, role: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/users, method: POST, role: IS_AUTHENTICATED_ANONYMOUSLY }
-      - { path: ^/, roles: [ IS_FULLY_AUTHENTICATED ] }
+      - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/, roles: [ IS_AUTHENTICATED_FULLY ] }
