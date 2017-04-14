@@ -27,7 +27,8 @@ class RhymeformDataProvider implements ItemDataProviderInterface
         if (Rhymeform::class !== $resourceClass) {
             throw new ResourceClassNotSupportedException();
         }
-var_dump($context);die;
+        var_dump($context);
+        die;
         // Retrieve the blog post item from somewhere
         return new Rhymeform($id);
     }
