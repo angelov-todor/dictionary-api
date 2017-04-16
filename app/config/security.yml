@@ -33,4 +33,5 @@ security:
       - { path: ^/authenticate, method: POST, role: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/users, method: POST, role: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/docs.json, role: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/, roles: [ IS_AUTHENTICATED_FULLY ] }
