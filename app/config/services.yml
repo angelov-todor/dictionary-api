@@ -21,4 +21,10 @@ services:
 
   'AppBundle\Action\UserAction':
     class: 'AppBundle\Action\UserAction'
-    arguments: [ '@service_container']
+    arguments: [ '@service_container' ]
+
+  app.documentation.normalizer:
+    class: AppBundle\Documentation\DocumentationNormalizer
+    decorates: api_platform.swagger.normalizer.documentation
+    arguments: ['@app.documentation.normalizer.inner']
+    public: false
