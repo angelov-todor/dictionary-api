@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Word;
+use ApiPlatform\Core\Bridge\NelmioApiDoc as ApiDoc;
 
 class RhymeformAction
 {
@@ -18,6 +19,12 @@ class RhymeformAction
      * )
      * @Method("GET")
      * @return mixed
+     *
+     * @ApiDoc(
+     *     resource=true,
+     *     resourceDescription="Operations on users.",
+     *     description="Retrieve list of users."
+     * )
      */
     public function __invoke($data)
     {
