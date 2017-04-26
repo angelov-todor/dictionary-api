@@ -7,6 +7,36 @@ AppBundle\Entity\Word:
       method: 'GET'
     rhymeform:
       route_name: 'rhymeform'
+      swagger_context:
+        parameters:
+          -
+            name: email
+            in: path
+            required: true
+            type: string
+
+        responses:
+          201:
+            description: "email with reset token has been sent"
+            schema:
+              type: "object"
+              required: ["email", "username"]
+              properties:
+                email:
+                  type: "string"
+                fullname:
+                  type: "string"
+                username:
+                  type: string
+          400:
+            description: "Invalid input"
+
+          404:
+            description: "resource not found"
+
+        summary: "Send email with token to reset password"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]
   attributes:
     filters: [word.search]
 
