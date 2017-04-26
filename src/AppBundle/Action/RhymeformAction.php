@@ -7,7 +7,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Word;
-use ApiPlatform\Core\Bridge\NelmioApiDoc;
 
 class RhymeformAction
 {
@@ -23,8 +22,9 @@ class RhymeformAction
     public function __invoke($data)
     {
         /* @var $data Word */
-
         $rhymeform = \AppBundle\Services\Rhymeform::findRhymeform($data->getName());
-        return new \AppBundle\Entity\Rhymeform($rhymeform, $data);
+        return [
+            'rhymeform' => $rhymeform
+        ];
     }
 }
