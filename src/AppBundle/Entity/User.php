@@ -18,6 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "authenticate"={
  *              "route_name"="authenticate",
  *               "swagger_context" = {
+ *                  "tags" = ["Authentication"],
  *                  "parameters" = {
  *                      {
  *                          "name" = "user",
