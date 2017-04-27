@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      itemOperations={
  *          "get"={"method"="GET"},
  *          "put"={"method"="PUT"},
- *          "delete"={"method"="DELETE"},
+ *          "post"={"method"="POST"},
  *          "authenticate"={
  *              "route_name"="authenticate",
  *               "swagger_context" = {
