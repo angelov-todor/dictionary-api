@@ -15,7 +15,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      itemOperations={
  *          "get"={"method"="GET"},
  *          "put"={"method"="PUT"},
- *          "post"={"method"="POST"},
  *          "authenticate"={
  *              "route_name"="authenticate",
  *               "swagger_context" = {
@@ -71,7 +70,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              }
  *          }
  *      },
- *      collectionOperations={},
+ *      collectionOperations={
+ *          "post"={"method"="POST"}
+ *     },
  *      attributes={
  *          "normalization_context"={"groups"={"user", "user-read"}},
  *          "denormalization_context"={"groups"={"user", "user-write"}}
