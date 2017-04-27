@@ -27,6 +27,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *                          "description" = "Your login credentials",
  *                          "schema" = {
  *                             "type" = "object",
+ *                             "description" = "User credentials",
  *                             "properties" = {
  *                                 "username" = {"type" = "string"},
  *                                 "password" = {"type" = "string"}
