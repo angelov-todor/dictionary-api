@@ -32,7 +32,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *                                 "username" = {"type" = "string"},
  *                                 "password" = {"type" = "string"}
  *                              },
- *                             "message" = {"type" = "string"},
  *                             "default" = {
  *                                  "username" = "",
  *                                  "password" = ""
