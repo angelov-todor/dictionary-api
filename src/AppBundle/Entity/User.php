@@ -21,16 +21,22 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *               "swagger_context" = {
  *                  "parameters" = {
  *                      {
- *                          "name" = "username",
+ *                          "name" = "user",
  *                          "in" = "body",
  *                          "required" = "true",
- *                          "type" = "string"
- *                      },
- *                      {
- *                          "name" = "password",
- *                          "in" = "body",
- *                          "required" = "true",
- *                          "type" = "string"
+ *                          "description" = "Your login credentials",
+ *                          "schema" = {
+ *                             "type" = "object",
+ *                             "properties" = {
+ *                                 "username" = {"type" = "string"},
+ *                                 "password" = {"type" = "string"}
+ *                              },
+ *                             "message" = {"type" = "string"},
+ *                             "default" = {
+ *                                  "username" = "",
+ *                                  "password" = ""
+ *                              }
+ *                          }
  *                      }
  *                  },
  *                  "responses" = {
