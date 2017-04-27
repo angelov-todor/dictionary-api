@@ -5,6 +5,7 @@ namespace AppBundle\Action;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Word;
 
@@ -23,8 +24,8 @@ class RhymeformAction
     {
         /* @var $data Word */
         $rhymeform = \AppBundle\Services\Rhymeform::findRhymeform($data->getName());
-        return [
+        return new JsonResponse([
             'rhymeform' => $rhymeform
-        ];
+        ]);
     }
 }

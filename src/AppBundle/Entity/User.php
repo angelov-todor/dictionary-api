@@ -11,10 +11,65 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity
- * @ApiResource(attributes={
- *     "normalization_context"={"groups"={"user", "user-read"}},
- *     "denormalization_context"={"groups"={"user", "user-write"}}
- * })
+ * @ApiResource(
+ *      itemOperations={
+ *          "get"={"method"="GET"},
+ *          "put"={"method"="PUT"},
+ *          "delete"={"method"="DELETE"},
+ *          "authenticate"={
+ *              "route_name"="authenticate",
+ *               "swagger_context" = {
+ *                  "parameters" = {
+ *                      {
+ *                          "name" = "username",
+ *                          "in" = "body",
+ *                          "required" = "true",
+ *                          "type" = "string"
+ *                      },
+ *                      {
+ *                          "name" = "password",
+ *                          "in" = "body",
+ *                          "required" = "true",
+ *                          "type" = "string"
+ *                      }
+ *                  },
+ *                  "responses" = {
+ *                      "200" = {
+ *                          "description" = "JWT authentication token",
+ *                          "schema" =  {
+ *                              "type" = "object",
+ *                              "required" = {
+ *                                  "token"
+ *                              },
+ *                              "properties" = {
+ *                                   "token" = {
+ *                                      "type" = "string"
+ *                                   }
+ *                              }
+ *                          }
+ *                      },
+ *                      "400" = {
+ *                          "description" = "Invalid input"
+ *                      },
+ *                      "401" = {
+ *                          "description" = "Bad credentials"
+ *                      }
+ *                  },
+ *                  "summary" = "Acquire JWT Token",
+ *                  "consumes" = {
+ *                      "application/json"
+ *                   },
+ *                  "produces" = {
+ *                      "application/json"
+ *                   }
+ *              }
+ *          }
+ *      },
+ *      attributes={
+ *          "normalization_context"={"groups"={"user", "user-read"}},
+ *          "denormalization_context"={"groups"={"user", "user-write"}}
+ *      }
+ * )
  */
 class User extends BaseUser
 {

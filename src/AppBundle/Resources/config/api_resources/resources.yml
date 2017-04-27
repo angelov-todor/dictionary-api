@@ -15,7 +15,7 @@ AppBundle\Entity\Word:
             required: true
             type: string
         responses:
-          201:
+          200:
             description: "rhymeform of the word"
             schema:
               type: "object"
@@ -23,8 +23,6 @@ AppBundle\Entity\Word:
               properties:
                 rhymeform:
                   type: "string"
-          400:
-            description: "Invalid input"
           404:
             description: "Resource not found"
         summary: "Retrieve the rhymeform of a word"

@@ -79,6 +79,8 @@ class DocumentationNormalizer implements NormalizerInterface
             ]
         ];
         $officialDocumentation = $this->normalizerDeferred->normalize($object, $format, $context);
+        return $officialDocumentation;
+
         return array_merge_recursive($officialDocumentation, $TokenDocumentation);
     }
 
