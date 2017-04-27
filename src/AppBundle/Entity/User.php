@@ -71,6 +71,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              }
  *          }
  *      },
+ *      collectionOperations={},
  *      attributes={
  *          "normalization_context"={"groups"={"user", "user-read"}},
  *          "denormalization_context"={"groups"={"user", "user-write"}}
