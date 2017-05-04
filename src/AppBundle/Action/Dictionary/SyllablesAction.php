@@ -12,7 +12,7 @@ class SyllablesAction
 {
     /**
      * @Route(
-     *     name="rhymeform",
+     *     name="syllables",
      *     path="/words/{id}/syllables",
      *     defaults={"_api_resource_class"=Word::class, "_api_item_operation_name"="syllables"}
      * )
