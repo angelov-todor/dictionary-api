@@ -5,7 +5,6 @@ namespace AppBundle\Services;
 
 class Rhymeform
 {
-
     /**
      * Check if the character is the stressed in word
      * @param string $mb_char

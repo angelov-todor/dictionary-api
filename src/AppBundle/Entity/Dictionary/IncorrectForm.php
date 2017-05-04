@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace AppBundle\Entity;
+namespace AppBundle\Entity\Dictionary;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -69,11 +69,11 @@ class IncorrectForm
     /**
      * Set correctWord
      *
-     * @param \AppBundle\Entity\Word $correctWord
+     * @param Word $correctWord
      *
      * @return IncorrectForm
      */
-    public function setCorrectWord(\AppBundle\Entity\Word $correctWord = null)
+    public function setCorrectWord(Word $correctWord = null)
     {
         $this->correctWord = $correctWord;
 
@@ -83,7 +83,7 @@ class IncorrectForm
     /**
      * Get correctWord
      *
-     * @return \AppBundle\Entity\Word
+     * @return Word
      */
     public function getCorrectWord()
     {

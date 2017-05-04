@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace AppBundle\Entity;
+namespace AppBundle\Entity\Dictionary;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -90,7 +91,7 @@ class Word
      */
     public function __construct()
     {
-        $this->incorrectForms = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->incorrectForms = new ArrayCollection();
     }
 
     /**
@@ -298,11 +299,11 @@ class Word
     /**
      * Set type
      *
-     * @param \AppBundle\Entity\WordType $type
+     * @param WordType $type
      *
      * @return Word
      */
-    public function setType(\AppBundle\Entity\WordType $type = null)
+    public function setType(WordType $type = null)
     {
         $this->type = $type;
 
@@ -312,7 +313,7 @@ class Word
     /**
      * Get type
      *
-     * @return \AppBundle\Entity\WordType
+     * @return WordType
      */
     public function getType()
     {
@@ -322,11 +323,11 @@ class Word
     /**
      * Add incorrectForm
      *
-     * @param \AppBundle\Entity\IncorrectForm $incorrectForm
+     * @param IncorrectForm $incorrectForm
      *
      * @return Word
      */
-    public function addIncorrectForm(\AppBundle\Entity\IncorrectForm $incorrectForm)
+    public function addIncorrectForm(IncorrectForm $incorrectForm)
     {
         $this->incorrectForms[] = $incorrectForm;
 
@@ -336,9 +337,9 @@ class Word
     /**
      * Remove incorrectForm
      *
-     * @param \AppBundle\Entity\IncorrectForm $incorrectForm
+     * @param IncorrectForm $incorrectForm
      */
-    public function removeIncorrectForm(\AppBundle\Entity\IncorrectForm $incorrectForm)
+    public function removeIncorrectForm(IncorrectForm $incorrectForm)
     {
         $this->incorrectForms->removeElement($incorrectForm);
     }
@@ -356,11 +357,11 @@ class Word
     /**
      * Add derivativeForm
      *
-     * @param \AppBundle\Entity\DerivativeForm $derivativeForm
+     * @param DerivativeForm $derivativeForm
      *
      * @return Word
      */
-    public function addDerivativeForm(\AppBundle\Entity\DerivativeForm $derivativeForm)
+    public function addDerivativeForm(DerivativeForm $derivativeForm)
     {
         $this->derivativeForms[] = $derivativeForm;
 
@@ -370,9 +371,9 @@ class Word
     /**
      * Remove derivativeForm
      *
-     * @param \AppBundle\Entity\DerivativeForm $derivativeForm
+     * @param DerivativeForm $derivativeForm
      */
-    public function removeDerivativeForm(\AppBundle\Entity\DerivativeForm $derivativeForm)
+    public function removeDerivativeForm(DerivativeForm $derivativeForm)
     {
         $this->derivativeForms->removeElement($derivativeForm);
     }

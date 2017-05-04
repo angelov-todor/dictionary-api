@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace AppBundle\Entity;
+namespace AppBundle\Entity\Dictionary;
 
 use Doctrine\ORM\Mapping as ORM;
 

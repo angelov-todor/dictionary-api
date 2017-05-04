@@ -1,4 +1,4 @@
-AppBundle\Entity\Word:
+AppBundle\Entity\Dictionary\Word:
   collectionOperations:
     get:
       method: 'GET' # nothing more to add if we want to keep the default controller
@@ -31,7 +31,7 @@ AppBundle\Entity\Word:
   attributes:
     filters: [word.search]
 
-AppBundle\Entity\WordType:
+AppBundle\Entity\Dictionary\WordType:
   collectionOperations:
     get:
       method: 'GET' # nothing more to add if we want to keep the default controller
@@ -44,7 +44,7 @@ AppBundle\Entity\WordType:
 #    get:
 #      method: 'GET'
 
-AppBundle\Entity\IncorrectForm:
+AppBundle\Entity\Dictionary\IncorrectForm:
   collectionOperations:
     get:
       method: 'GET' # nothing more to add if we want to keep the default controller
@@ -52,7 +52,7 @@ AppBundle\Entity\IncorrectForm:
     get:
       method: 'GET'
 
-AppBundle\Entity\DerivativeForm:
+AppBundle\Entity\Dictionary\DerivativeForm:
   collectionOperations:
     get:
       method: 'GET' # nothing more to add if we want to keep the default controller

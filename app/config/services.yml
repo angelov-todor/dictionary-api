@@ -13,11 +13,11 @@ services:
     arguments: [ { name: 'partial' } ]
     tags:      [ { name: 'api_platform.filter', id: 'word.search' } ]
 
-  rhymeform.item_data_provider:
-    class: 'AppBundle\DataProvider\RhymeformDataProvider'
-    public: false
-    tags:
-      -  { name: 'api_platform.item_data_provider' }
+#  rhymeform.item_data_provider:
+#    class: 'AppBundle\DataProvider\RhymeformDataProvider'
+#    public: false
+#    tags:
+#      -  { name: 'api_platform.item_data_provider' }
 
   'AppBundle\Action\UserAction':
     class: 'AppBundle\Action\UserAction'

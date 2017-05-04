@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace AppBundle\Entity;
+namespace AppBundle\Entity\Dictionary;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -189,11 +189,11 @@ class DerivativeForm
     /**
      * Set baseWord
      *
-     * @param \AppBundle\Entity\Word $baseWord
+     * @param Word $baseWord
      *
      * @return DerivativeForm
      */
-    public function setBaseWord(\AppBundle\Entity\Word $baseWord = null)
+    public function setBaseWord(Word $baseWord = null)
     {
         $this->baseWord = $baseWord;
 
@@ -203,7 +203,7 @@ class DerivativeForm
     /**
      * Get baseWord
      *
-     * @return \AppBundle\Entity\Word
+     * @return Word
      */
     public function getBaseWord()
     {

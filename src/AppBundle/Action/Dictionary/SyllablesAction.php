@@ -1,15 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace AppBundle\Action;
+namespace AppBundle\Action\Dictionary;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Dictionary\Word;
 
-class RhymeformAction
+class SyllablesAction
 {
     /**
      * @Route(
