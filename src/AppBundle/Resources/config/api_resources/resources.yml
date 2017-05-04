@@ -44,7 +44,7 @@ AppBundle\Entity\Dictionary\Word:
                     type: "object"
                     required: ["syllables"]
                     properties:
-                      rhymeform:
+                      syllables:
                         type: "string"
                 404:
                   description: "Resource not found"
