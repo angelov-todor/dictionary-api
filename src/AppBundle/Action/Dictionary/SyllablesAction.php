@@ -13,8 +13,8 @@ class SyllablesAction
     /**
      * @Route(
      *     name="rhymeform",
-     *     path="/words/{id}/rhymeform",
-     *     defaults={"_api_resource_class"=Word::class, "_api_item_operation_name"="rhymeform"}
+     *     path="/words/{id}/syllables",
+     *     defaults={"_api_resource_class"=Word::class, "_api_item_operation_name"="syllables"}
      * )
      * @Method("GET")
      * @return mixed
@@ -22,9 +22,10 @@ class SyllablesAction
     public function __invoke($data)
     {
         /* @var $data Word */
-        $rhymeform = \AppBundle\Services\Rhymeform::findRhymeform($data->getName());
+        $service = new \AppBundle\Services\Syllables();
+        $syllables = $service->processWord($data->getName());
         return new JsonResponse([
-            'rhymeform' => $rhymeform
+            'syllables' => $syllables
         ]);
     }
 }

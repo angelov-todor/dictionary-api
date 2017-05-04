@@ -28,6 +28,8 @@ AppBundle\Entity\Dictionary\Word:
         summary: "Retrieve the rhymeform of a word"
         consumes: ["application/json", "text/html"]
         produces: ["application/json"]
+    syllables:
+        route_name: 'syllables'
   attributes:
     filters: [word.search]
 

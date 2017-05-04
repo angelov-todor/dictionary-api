@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace AppBundle\Services;
 
-use AppBundle\Service\Word\AdapterInterface;
+use AppBundle\Services\Word\AdapterInterface;
 
 abstract class Word
 {
