@@ -29,7 +29,28 @@ AppBundle\Entity\Dictionary\Word:
         consumes: ["application/json", "text/html"]
         produces: ["application/json"]
     syllables:
-        route_name: 'syllables'
+      route_name: 'syllables'
+      swagger_context:
+              parameters:
+                -
+                  name: id
+                  in: path
+                  required: true
+                  type: string
+              responses:
+                200:
+                  description: "syllables of the word separated by dash"
+                  schema:
+                    type: "object"
+                    required: ["syllables"]
+                    properties:
+                      rhymeform:
+                        type: "string"
+                404:
+                  description: "Resource not found"
+              summary: "Retrieve the syllables of a word"
+              consumes: ["application/json", "text/html"]
+              produces: ["application/json"]
   attributes:
     filters: [word.search]
 
