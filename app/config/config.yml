@@ -66,13 +66,8 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #     path:     "%database_path%"
-
+        mapping_types:
+          enum: string
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
@@ -97,6 +92,7 @@ nelmio_cors:
     paths:
         '^/': ~
 
+# FOS User
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
@@ -105,6 +101,7 @@ fos_user:
       address: admin@localhost
       sender_name: admin
 
+# Lexik JWT Authentication
 lexik_jwt_authentication:
   private_key_path: '%jwt_private_key_path%'
   public_key_path: '%jwt_public_key_path%'

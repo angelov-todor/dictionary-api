@@ -62,10 +62,7 @@ AppBundle\Entity\Dictionary\WordType:
     get:
       method: 'GET'
 
-#AppBundle\Entity\Rhymeform:
-#  itemOperations:
-#    get:
-#      method: 'GET'
+AppBundle\Entity\Metadata: ~
 
 AppBundle\Entity\Dictionary\IncorrectForm:
   collectionOperations:
