@@ -64,6 +64,10 @@ AppBundle\Entity\Dictionary\WordType:
 
 AppBundle\Entity\Metadata: ~
 
+AppBundle\Entity\Image: ~
+
+AppBundle\Entity\ImageMetadata: ~
+
 AppBundle\Entity\Dictionary\IncorrectForm:
   collectionOperations:
     get:
