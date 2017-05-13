@@ -25,38 +25,24 @@ class DocumentationNormalizer implements NormalizerInterface
         $TokenDocumentation = [
             'paths' =>
                 [
-                    '/images.search' =>
+                    '/images-search' =>
                         [
                             'get' => [
                                 'tags' => ['Actions'],
                                 'operationId' => 'getToken',
                                 'consumes' => 'application/json',
                                 'produces' => 'application/json',
-                                'summary' => 'Acquire JWT Token.',
+                                'summary' => 'Search an image',
                                 'parameters' => [
 
                                 ],
                                 'responses' => [
-                                    200 => [
-                                        'description' => 'give JWT token',
-                                        'schema' => ['$ref' => "#/definitions/token"]
-                                    ],
+
                                     401 => ['description' => 'Bad credentials']
                                 ]
                             ]
                         ],
                 ],
-            'definitions' => [
-                'token' => [
-                    'type' => 'object',
-                    'description' => "",
-                    'properties' => [
-                        'token' => [
-                            'type' => 'string'
-                        ]
-                    ]
-                ]
-            ]
         ];
         $officialDocumentation = $this->normalizerDeferred->normalize($object, $format, $context);
 //        return $officialDocumentation;
