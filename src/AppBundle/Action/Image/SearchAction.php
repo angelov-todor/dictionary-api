@@ -26,7 +26,7 @@ class SearchAction
     /**
      * @Route(
      *     name="image-search",
-     *     path="/images/search",
+     *     path="/images.search",
      *     defaults={"_api_resource_class"=Image::class, "_api_collection_operation_name "="search"}
      * )
      * @Method("GET")
