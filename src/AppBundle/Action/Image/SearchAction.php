@@ -48,6 +48,11 @@ class SearchAction
      */
     public function imageSearchAction(Request $request)
     {
-        return new JsonResponse(['test' => 'ok']);
+        $term = $request->get('term');
+        $page = $request->get('page', 1);
+        $start = (($page - 1) * 10) + 1;
+        $url = sprintf($this->uri, $this->key, $this->cx, $term, $start);
+        $response = file_get_contents($url);
+        return new JsonResponse(json_decode($response));
     }
 }
