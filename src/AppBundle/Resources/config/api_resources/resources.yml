@@ -64,15 +64,36 @@ AppBundle\Entity\Dictionary\WordType:
 
 AppBundle\Entity\Metadata: ~
 
-AppBundle\Entity\Image: ~
-#  itemOperations: ~
-#  collectionOperations:
-#      get:
-#        method: 'GET'
-#      post:
-#        method: 'POST'
-#      search:
-#        route_name: 'image-search'
+AppBundle\Entity\Image:
+  itemOperations:
+    get:
+      method: 'GET'
+    put:
+      method: 'PUT'
+    images_search:
+      route_name: 'images_search'
+      swagger_context:
+        parameters:
+          -
+            name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          200:
+            description: "syllables of the word separated by dash"
+            schema:
+              type: "object"
+              required: ["syllables"]
+              properties:
+                syllables:
+                  type: "string"
+          404:
+            description: "Resource not found"
+        summary: "Retrieve the syllables of a word"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]
+  collectionOperations: ~
 
 AppBundle\Entity\ImageMetadata: ~
 
