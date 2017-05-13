@@ -38,8 +38,8 @@ class SearchAction
 
     /**
      * @Route(
-     *     name="images.search",
-     *     path="/images.search"
+     *     name="images_search",
+     *     path="/images-search"
      * )
      * @Method("GET")
      *

@@ -13,8 +13,8 @@ services:
     arguments: [ '@service_container' ]
 
   'AppBundle\Action\Image\SearchAction':
-      class: 'AppBundle\Action\Image\SearchAction'
-      arguments: [ '@service_container' ]
+    class: 'AppBundle\Action\Image\SearchAction'
+    arguments: [ '@service_container' ]
 
   app.documentation.normalizer:
     class: AppBundle\Documentation\DocumentationNormalizer
