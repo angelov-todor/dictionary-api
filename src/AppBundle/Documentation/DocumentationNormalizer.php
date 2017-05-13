@@ -22,7 +22,7 @@ class DocumentationNormalizer implements NormalizerInterface
      */
     public function normalize($object, $format = null, array $context = array())
     {
-        $TokenDocumentation = [
+        /*$TokenDocumentation = [
             'paths' =>
                 [
                     '/images-search' =>
@@ -43,11 +43,11 @@ class DocumentationNormalizer implements NormalizerInterface
                             ]
                         ],
                 ],
-        ];
+        ];*/
         $officialDocumentation = $this->normalizerDeferred->normalize($object, $format, $context);
-//        return $officialDocumentation;
+        return $officialDocumentation;
 
-        return array_merge_recursive($officialDocumentation, $TokenDocumentation);
+//        return array_merge_recursive($officialDocumentation, $TokenDocumentation);
     }
 
     /**
