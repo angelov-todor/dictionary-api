@@ -4,12 +4,25 @@ declare(strict_types=1);
 namespace AppBundle\Action\Image;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
-use AppBundle\Entity\Image;
 
 class SearchAction
 {
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
     /**
      * @var string
      */
@@ -25,15 +38,16 @@ class SearchAction
 
     /**
      * @Route(
-     *     name="image-search",
-     *     path="/images.search",
-     *     defaults={"_api_resource_class"=Image::class, "_api_collection_operation_name "="search"}
+     *     name="images.search",
+     *     path="/images.search"
      * )
      * @Method("GET")
-     * @return mixed
+     *
+     * @param Request $request
+     * @return JsonResponse|Response|ResponseHeaderBag
      */
-    public function __invoke($data)
+    public function imageSearchAction(Request $request)
     {
-        return new JsonResponse();
+        return new JsonResponse(['test' => 'ok']);
     }
 }
