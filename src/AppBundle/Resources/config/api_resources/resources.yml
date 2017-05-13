@@ -75,22 +75,27 @@ AppBundle\Entity\Image:
       swagger_context:
         parameters:
           -
-            name: id
-            in: path
+            name: term
+            in: query
             required: true
+            type: string
+          -
+            name: page
+            in: query
+            required: false
             type: string
         responses:
           200:
-            description: "syllables of the word separated by dash"
+            description: "found images"
             schema:
               type: "object"
-              required: ["syllables"]
+              required: ["images"]
               properties:
-                syllables:
+                images:
                   type: "string"
           404:
             description: "Resource not found"
-        summary: "Retrieve the syllables of a word"
+        summary: "Search images by term"
         consumes: ["application/json", "text/html"]
         produces: ["application/json"]
   collectionOperations: ~
