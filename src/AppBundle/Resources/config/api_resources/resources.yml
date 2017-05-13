@@ -64,7 +64,15 @@ AppBundle\Entity\Dictionary\WordType:
 
 AppBundle\Entity\Metadata: ~
 
-AppBundle\Entity\Image: ~
+AppBundle\Entity\Image:
+  itemOperations: ~
+  collectionOperations:
+      get:
+        method: 'GET'
+      post:
+        method: 'POST'
+      search:
+        route_name: 'search'
 
 AppBundle\Entity\ImageMetadata: ~
 
