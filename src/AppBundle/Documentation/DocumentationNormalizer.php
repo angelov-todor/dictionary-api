@@ -22,39 +22,19 @@ class DocumentationNormalizer implements NormalizerInterface
      */
     public function normalize($object, $format = null, array $context = array())
     {
-        $allowedFormat = [
-            'application/json'
-        ];
         $TokenDocumentation = [
             'paths' =>
                 [
-                    '/authenticate' =>
+                    '/images.search' =>
                         [
-                            'post' => [
-                                'tags' => ['Authentication'],
+                            'get' => [
+                                'tags' => ['Actions'],
                                 'operationId' => 'getToken',
-                                'consumes' => $allowedFormat,
-                                'produces' => $allowedFormat,
+                                'consumes' => 'application/json',
+                                'produces' => 'application/json',
                                 'summary' => 'Acquire JWT Token.',
                                 'parameters' => [
-                                    [
-                                        'name' => 'user',
-                                        'in' => 'body',
-                                        'description' => 'Your Login Credentials',
-                                        'required' => true,
-                                        'schema' => [
-                                            "type" => "object",
-                                            "properties" => [
-                                                "username" => ["type" => "string"],
-                                                "password" => ["type" => "string"]
-                                            ],
-                                            "message" => ["type" => "string"],
-                                            "default" => [
-                                                "username" => "",
-                                                "password" => ""
-                                            ]
-                                        ]
-                                    ]
+
                                 ],
                                 'responses' => [
                                     200 => [
@@ -79,7 +59,7 @@ class DocumentationNormalizer implements NormalizerInterface
             ]
         ];
         $officialDocumentation = $this->normalizerDeferred->normalize($object, $format, $context);
-        return $officialDocumentation;
+//        return $officialDocumentation;
 
         return array_merge_recursive($officialDocumentation, $TokenDocumentation);
     }
