@@ -31,26 +31,26 @@ AppBundle\Entity\Dictionary\Word:
     syllables:
       route_name: 'syllables'
       swagger_context:
-              parameters:
-                -
-                  name: id
-                  in: path
-                  required: true
-                  type: string
-              responses:
-                200:
-                  description: "syllables of the word separated by dash"
-                  schema:
-                    type: "object"
-                    required: ["syllables"]
-                    properties:
-                      syllables:
-                        type: "string"
-                404:
-                  description: "Resource not found"
-              summary: "Retrieve the syllables of a word"
-              consumes: ["application/json", "text/html"]
-              produces: ["application/json"]
+        parameters:
+          -
+            name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          200:
+            description: "syllables of the word separated by dash"
+            schema:
+              type: "object"
+              required: ["syllables"]
+              properties:
+                syllables:
+                  type: "string"
+          404:
+            description: "Resource not found"
+        summary: "Retrieve the syllables of a word"
+        consumes: ["application/json", "text/html"]
+        produces: ["application/json"]
   attributes:
     filters: [word.search]
 
@@ -72,7 +72,7 @@ AppBundle\Entity\Image:
       post:
         method: 'POST'
       search:
-        route_name: 'search'
+        route_name: 'image-search'
 
 AppBundle\Entity\ImageMetadata: ~
 

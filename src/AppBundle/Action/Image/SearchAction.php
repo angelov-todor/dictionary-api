@@ -25,7 +25,7 @@ class SearchAction
 
     /**
      * @Route(
-     *     name="search",
+     *     name="image-search",
      *     path="/images/search",
      *     defaults={"_api_resource_class"=Image::class, "_api_item_operation_name"="search"}
      * )
@@ -34,7 +34,6 @@ class SearchAction
      */
     public function __invoke($data)
     {
-        /* @var $data Image */
-        var_dump($data);die;
+        return new JsonResponse();
     }
 }
