@@ -37,8 +37,13 @@ class UploadAction
     {
         $filename = $request->get('filename');
         $data = $request->get('data');
+        if (!$filename || !$data) {
+            return new JsonResponse([
+                'filename' => $filename,
+                'data' => $data
+            ]);
+        }
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
-
         $file = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $this->getToken(30) . '.' . $ext;
         return new JsonResponse(['path' => $file]);
     }
