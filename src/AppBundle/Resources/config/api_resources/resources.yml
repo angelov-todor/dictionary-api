@@ -99,7 +99,7 @@ AppBundle\Entity\Image:
         consumes: ["application/json", "text/html"]
         produces: ["application/json"]
     images_upload:
-      route_name: 'images_search'
+      route_name: 'images_upload'
   collectionOperations: ~
 
 AppBundle\Entity\ImageMetadata: ~
