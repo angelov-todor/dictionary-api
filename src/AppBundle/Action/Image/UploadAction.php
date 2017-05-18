@@ -37,9 +37,10 @@ class UploadAction
     {
         $filename = $request->get('filename');
         $data = $request->get('data');
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
 
-
-        return new JsonResponse(['path' => getcwd()]);
+        $file = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $this->getToken(30) . '.' . $ext;
+        return new JsonResponse(['path' => $file]);
     }
 
     /**
@@ -64,5 +65,24 @@ class UploadAction
         fclose($ifp);
 
         return $filename;
+    }
+
+    /**
+     * @param int $length
+     * @return string
+     */
+    protected function getToken(int $length): string
+    {
+        $token = "";
+        $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $codeAlphabet .= "abcdefghijklmnopqrstuvwxyz";
+        $codeAlphabet .= "0123456789";
+        $max = strlen($codeAlphabet); // edited
+
+        for ($i = 0; $i < $length; $i++) {
+            $token .= $codeAlphabet[rand(0, $max - 1)];
+        }
+
+        return $token;
     }
 }
