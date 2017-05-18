@@ -98,6 +98,8 @@ AppBundle\Entity\Image:
         summary: "Search images by term"
         consumes: ["application/json", "text/html"]
         produces: ["application/json"]
+    images_upload:
+      route_name: 'images_search'
   collectionOperations: ~
 
 AppBundle\Entity\ImageMetadata: ~
