@@ -49,8 +49,8 @@ class UploadAction
             ]);
         }
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $file = 'assets' . DIRECTORY_SEPARATOR . $this->getToken(30) . '.' . $ext;
-        $this->base64ToJpeg($data, $filename);
+        $file = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $this->getToken(30) . '.' . $ext;
+        $this->base64ToJpeg($data, $file);
         return new JsonResponse(['path' => $file]);
     }
 
