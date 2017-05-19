@@ -53,11 +53,11 @@ class UploadAction
         $file = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $this->getToken(30) . '.' . $ext;
 
         $image = new Image();
+        $image->setSrc($this->base64ToJpeg($data, $file));
 
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $entityManager->persist($image);
         $entityManager->flush($image);
-        $image->setSrc($this->base64ToJpeg($data, $file));
 
         return $image;
     }
