@@ -40,7 +40,8 @@ class UploadAction
         if (!$filename || !$data) {
             return new JsonResponse([
                 'filename' => $filename,
-                'data' => $data
+                'data' => $data,
+                'content' => $request->getContent()
             ]);
         }
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
