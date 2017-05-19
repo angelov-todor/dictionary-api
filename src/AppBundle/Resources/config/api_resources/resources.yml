@@ -73,22 +73,15 @@ AppBundle\Entity\Image:
       swagger_context:
         parameters:
           -
-            name: image
-            in: body
+            name: term
+            in: query
             required: true
             type: string
-            description: The image data
-            schema:
-              type: object
-              description: The image data
-              properties:
-                filename:
-                  type: string
-                data:
-                  type: string
-              default:
-                filename: ""
-                data: ""
+          -
+            name: page
+            in: query
+            required: false
+            type: string
         responses:
           200:
             description: "found images"
@@ -106,12 +99,24 @@ AppBundle\Entity\Image:
     images_upload:
       route_name: 'images_upload'
       swagger_context:
-        parameters:
-          -
-            name: id
-            in: path
-            required: true
-            type: string
+       parameters:
+         -
+           name: image
+           in: body
+           required: true
+           type: string
+           description: The image data
+           schema:
+             type: object
+             description: The image data
+             properties:
+               filename:
+                 type: string
+               data:
+                 type: string
+             default:
+               filename: ""
+               data: ""
         responses:
           201:
             description: "Image created successfully"
@@ -134,7 +139,7 @@ AppBundle\Entity\ImageMetadata: ~
 AppBundle\Entity\Dictionary\IncorrectForm:
   collectionOperations:
     get:
-      method: 'GET' # nothing more to add if we want to keep the default controller
+      method: 'GET'
   itemOperations:
     get:
       method: 'GET'
