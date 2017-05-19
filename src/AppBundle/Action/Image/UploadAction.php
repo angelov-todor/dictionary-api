@@ -50,6 +50,7 @@ class UploadAction
         }
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         $file = 'assets' . DIRECTORY_SEPARATOR . $this->getToken(30) . '.' . $ext;
+        $this->base64ToJpeg($data, $filename);
         return new JsonResponse(['path' => $file]);
     }
 
