@@ -46,7 +46,7 @@ class UploadAction
                 'filename' => $filename,
                 'data' => $data,
                 'content' => $request->getContent()
-            ]);
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         $location = 'assets' . DIRECTORY_SEPARATOR . $this->getToken(40) . '.' . $ext;
@@ -60,7 +60,7 @@ class UploadAction
         $entityManager->persist($image);
         $entityManager->flush($image);
 
-        return new JsonResponse($image, 201);
+        return new JsonResponse($image, Response::HTTP_CREATED);
     }
 
     /**
