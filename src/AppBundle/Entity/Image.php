@@ -32,13 +32,6 @@ class Image
     protected $src;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="string")
-     */
-    protected $description;
-
-    /**
      * @var ImageMetadata
      *
      * @ORM\OneToMany(targetEntity="ImageMetadata", mappedBy="image")
@@ -64,23 +57,9 @@ class Image
     }
 
     /**
-     * @param string $description
+     * @param Collection $meta
      * @return Image
      */
-    public function setDescription(string $description): Image
-    {
-        $this->description = $description;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
     public function addImageMetadata(Collection $meta): Image
     {
         foreach ($meta as $iMeta) {
@@ -89,12 +68,20 @@ class Image
         return $this;
     }
 
+    /**
+     * @param ImageMetadata $meta
+     * @return Image
+     */
     public function addMetadata(ImageMetadata $meta): Image
     {
         $this->imageMetadata[] = $meta;
         return $this;
     }
 
+    /**
+     * @param Collection $meta
+     * @return Image
+     */
     public function removeImageMetadata(Collection $meta): Image
     {
         foreach ($meta as $iMeta) {
@@ -111,6 +98,9 @@ class Image
         return $this->imageMetadata;
     }
 
+    /**
+     * Image constructor.
+     */
     public function __construct()
     {
         $this->imageMetadata = new ArrayCollection();

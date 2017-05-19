@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AppBundle\Action\Image;
 
+use AppBundle\Entity\Image;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -31,7 +32,7 @@ class UploadAction
      * @Method("POST")
      *
      * @param Request $request
-     * @return JsonResponse|Response|ResponseHeaderBag
+     * @return JsonResponse|Response|Image
      */
     public function imageUploadAction(Request $request)
     {
@@ -50,8 +51,15 @@ class UploadAction
         }
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         $file = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $this->getToken(30) . '.' . $ext;
-        $this->base64ToJpeg($data, $file);
-        return new JsonResponse(['path' => $file]);
+
+        $image = new Image();
+
+        $entityManager = $this->container->get('doctrine.orm.entity_manager');
+        $entityManager->persist($image);
+        $entityManager->flush($image);
+        $image->setSrc($this->base64ToJpeg($data, $file));
+
+        return $image;
     }
 
     /**
