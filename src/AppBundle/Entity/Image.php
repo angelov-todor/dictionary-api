@@ -91,9 +91,9 @@ class Image
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getImageMetadata(): ArrayCollection
+    public function getImageMetadata(): Collection
     {
         return $this->imageMetadata;
     }
