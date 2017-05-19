@@ -35,8 +35,12 @@ class UploadAction
      */
     public function imageUploadAction(Request $request)
     {
-        $filename = $request->get('filename');
-        $data = $request->get('data');
+        $requestContent = $request->getContent();
+        $json = json_decode($requestContent);
+
+        $filename = $json->filename;
+        $data = $json->data;
+
         if (!$filename || !$data) {
             return new JsonResponse([
                 'filename' => $filename,
