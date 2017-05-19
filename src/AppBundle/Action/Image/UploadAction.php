@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UploadAction
@@ -50,16 +49,18 @@ class UploadAction
             ]);
         }
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $file = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $this->getToken(30) . '.' . $ext;
+        $location = 'assets' . DIRECTORY_SEPARATOR . $this->getToken(40) . '.' . $ext;
+        $file = getcwd() . DIRECTORY_SEPARATOR . $location;
 
         $image = new Image();
-        $image->setSrc($this->base64ToJpeg($data, $file));
+        $this->base64ToJpeg($data, $file);
+        $image->setSrc($location);
 
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $entityManager->persist($image);
         $entityManager->flush($image);
 
-        return $image;
+        return new JsonResponse($image, 201);
     }
 
     /**
