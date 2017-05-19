@@ -99,38 +99,38 @@ AppBundle\Entity\Image:
     images_upload:
       route_name: 'images_upload'
       swagger_context:
-      parameters:
-        -
-          name: image
-          in: body
-          required: true
-          type: string
-          description: The image data
-          schema:
-            type: object
+        parameters:
+          -
+            name: image
+            in: body
+            required: true
+            type: string
             description: The image data
-            properties:
-              filename:
-                type: string
-              data:
-                type: string
-            default:
-              filename: ""
-              data: ""
-      responses:
-        201:
-          description: "Image created successfully"
-          schema:
-            type: "object"
-            required: ["image"]
-            properties:
-              src:
-                type: "string"
-        422:
-          description: "Bad data sent"
-      summary: "Upload an image"
-      consumes: ["application/json"]
-      produces: ["application/json","application/hal+json"]
+            schema:
+              type: object
+              description: The image data
+              properties:
+                filename:
+                  type: string
+                data:
+                  type: string
+              default:
+                filename: ""
+                data: ""
+        responses:
+          201:
+            description: "Image created successfully"
+            schema:
+              type: "object"
+              required: ["image"]
+              properties:
+                src:
+                  type: "string"
+          422:
+            description: "Bad data sent"
+        summary: "Upload an image"
+        consumes: ["application/json"]
+        produces: ["application/json","application/hal+json"]
   collectionOperations:
     get:
       method: 'GET'
