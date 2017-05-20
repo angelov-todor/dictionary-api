@@ -6,6 +6,7 @@ namespace AppBundle\Action\Image;
 use AppBundle\Entity\Image;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,26 @@ class UploadAction
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
+    }
+
+    /**
+     * @Route(
+     *     name="media",
+     *     path="/media/{resource}"
+     * )
+     * @Method("GET")
+     *
+     * @param Request $request
+     * @return JsonResponse|Response|Image
+     */
+    public function serveAction(Request $request)
+    {
+        $image = $request->get('resource');
+//        return new JsonResponse('');
+
+        $file = \Gregwar\Image\Image::open($image )->cropResize(50,50);
+
+        return new BinaryFileResponse($file->jpeg());
     }
 
     /**
