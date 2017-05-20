@@ -39,7 +39,8 @@ class UploadAction
         $image = $request->get('resource');
 //        return new JsonResponse('');
 
-        $file = \Gregwar\Image\Image::open($image )->cropResize(50,50);
+        $file = \Gregwar\Image\Image::open('assets' . DIRECTORY_SEPARATOR . $image)
+            ->cropResize(50, 50);
 
         return new BinaryFileResponse($file->jpeg());
     }
