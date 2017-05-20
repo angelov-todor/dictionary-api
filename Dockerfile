@@ -11,6 +11,7 @@ RUN buildDeps=" \
         $buildDeps \
         libicu52 \
         zlib1g \
+        libpng-dev \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install \
         intl \
