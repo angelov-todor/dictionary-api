@@ -39,12 +39,13 @@ class UploadAction
         $image = $request->get('resource');
 
         $location = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $image;
-        if (!file_exists($location)) {
-            return new JsonResponse([
-                'location' => $location,
-                'error' => 'Not found'
-            ], 404);
-        }
+//        if (!file_exists($location)) {
+        return new JsonResponse([
+            'location' => $location,
+            'cwd' => getcwd(),
+            'error' => 'Not found'
+        ], 404);
+//        }
         $file = \Gregwar\Image\Image::open($location)
             ->cropResize(50, 50);
 
