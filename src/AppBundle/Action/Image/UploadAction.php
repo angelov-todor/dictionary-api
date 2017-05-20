@@ -32,14 +32,20 @@ class UploadAction
      * @Method("GET")
      *
      * @param Request $request
-     * @return BinaryFileResponse
+     * @return BinaryFileResponse|JsonResponse
      */
     public function serveAction(Request $request)
     {
         $image = $request->get('resource');
-//        return new JsonResponse('');
 
-        $file = \Gregwar\Image\Image::open(getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $image)
+        $location = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $image;
+        if (!file_exists($location)) {
+            return new JsonResponse([
+                'location' => $location,
+                'error' => 'Not found'
+            ], 404);
+        }
+        $file = \Gregwar\Image\Image::open($location)
             ->cropResize(50, 50);
 
         return new BinaryFileResponse($file->jpeg());
