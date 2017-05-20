@@ -32,7 +32,7 @@ class UploadAction
      * @Method("GET")
      *
      * @param Request $request
-     * @return JsonResponse|Response|Image
+     * @return BinaryFileResponse
      */
     public function serveAction(Request $request)
     {

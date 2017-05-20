@@ -17,6 +17,7 @@ RUN buildDeps=" \
         mbstring \
         pdo_mysql \
         zip \
+        gd \
     && apt-get purge -y --auto-remove $buildDeps
 RUN pecl install \
         apcu-$APCU_VERSION \
