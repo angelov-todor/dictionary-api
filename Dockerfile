@@ -8,15 +8,15 @@ RUN buildDeps=" \
     " \
 #    && apt-get install software-properties-common \
 #    && add-apt-repository ppa:ondrej/php \
-    echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" > /etc/apt/sources.list.d/ondrej-php.list \
-    && echo "deb http://ppa.launchpad.net/ondrej/php-qa/ubuntu xenial main" > /etc/apt/sources.list.d/ondrej-php-qa.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         $buildDeps \
         libicu52 \
         zlib1g \
         libpng-dev \
-#    && rm -rf /var/lib/apt/lists/* \
+        libmagickwand-dev \
+        imagemagick \
+    && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install \
         intl \
         mbstring \
@@ -31,6 +31,8 @@ RUN pecl install \
         opcache \
     && docker-php-ext-enable --ini-name 20-apcu.ini \
         apcu
+    && docker-php-ext-enable --ini-name 16-imagick.ini \
+        imagick
 
 # Apache config
 RUN a2enmod rewrite
