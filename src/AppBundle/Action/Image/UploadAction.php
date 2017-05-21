@@ -46,12 +46,9 @@ class UploadAction
                 'error' => 'Not found'
             ], 404);
         }
-        $file = \Gregwar\Image\Image::open($location)
-            ->useFallback(false)
-            ->cropResize(50, 50)
-            ->jpeg();
+        $imagine = $this->container['imagine'];
 
-        return new BinaryFileResponse($file);
+        return new BinaryFileResponse($imagine->filter($location, 'my_thumb'));
     }
 
     /**
