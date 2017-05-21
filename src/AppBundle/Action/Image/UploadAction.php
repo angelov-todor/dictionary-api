@@ -75,7 +75,7 @@ class UploadAction
                 'error' => 'Not found'
             ], 404);
         }
-
+        $path = 'assets/oQE1jaQZjxZnjEBN21pyca0LGVMtsE.jpg';
         $filter = 'my_thumb';
 
         if (!$this->getCacheManager()->isStored($path, $filter, null)) {
