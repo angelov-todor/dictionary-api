@@ -46,7 +46,7 @@ class UploadAction
                 'error' => 'Not found'
             ], 404);
         }
-        $imagine = $this->container->get('imagine');
+        $imagine = $this->container->get('liip_imagine');
 
         return new BinaryFileResponse($imagine->filter($location, 'my_thumb'));
     }
