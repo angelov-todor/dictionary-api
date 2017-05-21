@@ -95,8 +95,9 @@ class UploadAction
                 }
             }
         }
-var_dump($this->getCacheManager()->resolve($path, $filter, null));
-        return new BinaryFileResponse($this->getCacheManager()->resolve($path, $filter, null));
+        $resolved = $this->getCacheManager()->resolve($path, $filter, null);
+        var_dump($resolved);
+        return new BinaryFileResponse($resolved);
     }
 
     /**
