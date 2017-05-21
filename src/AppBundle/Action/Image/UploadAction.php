@@ -10,14 +10,12 @@ use Liip\ImagineBundle\Imagine\Data\DataManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\RequestContext;
 
 class UploadAction
 {
@@ -26,6 +24,10 @@ class UploadAction
      */
     protected $container;
 
+    /**
+     * UploadAction constructor.
+     * @param ContainerInterface $container
+     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
@@ -34,25 +36,31 @@ class UploadAction
     /**
      * @return CacheManager
      */
-    protected function getCacheManager()
+    protected function getCacheManager(): CacheManager
     {
-        return $this->container->get('liip_imagine.cache.manager');
+        /** @var CacheManager $cacheManager */
+        $cacheManager = $this->container->get('liip_imagine.cache.manager');
+        return $cacheManager;
     }
 
     /**
      * @return DataManager
      */
-    protected function getDataManager()
+    protected function getDataManager(): DataManager
     {
-        return $this->container->get('liip_imagine.data.manager');
+        /** @var DataManager $dataManager */
+        $dataManager = $this->container->get('liip_imagine.data.manager');
+        return $dataManager;
     }
 
     /**
      * @return FilterManager
      */
-    protected function getFilterManager()
+    protected function getFilterManager(): FilterManager
     {
-        return $this->container->get('liip_imagine.filter.manager');
+        /** @var FilterManager $filterManager */
+        $filterManager = $this->container->get('liip_imagine.filter.manager');
+        return $filterManager;
     }
 
     /**
@@ -63,9 +71,9 @@ class UploadAction
      * @Method("GET")
      *
      * @param Request $request
-     * @return RedirectResponse|JsonResponse
+     * @return RedirectResponse|JsonResponse|Response
      */
-    public function serveAction(Request $request)
+    public function serveAction(Request $request): Response
     {
         $image = $request->get('resource');
 
@@ -97,10 +105,8 @@ class UploadAction
                 }
             }
         }
-//        $this->getBaseUrl($request);
-        $resolved = $this->getCacheManager()->resolve($path, $filter, null);
 
-        return new RedirectResponse($resolved, 301);
+        return new RedirectResponse($this->getCacheManager()->resolve($path, $filter, null), 301);
     }
 
     /**
@@ -113,7 +119,7 @@ class UploadAction
      * @param Request $request
      * @return JsonResponse|Response|Image
      */
-    public function imageUploadAction(Request $request)
+    public function imageUploadAction(Request $request): Response
     {
         $requestContent = $request->getContent();
         $json = json_decode($requestContent);
@@ -141,35 +147,6 @@ class UploadAction
         $entityManager->flush($image);
 
         return new JsonResponse($image, Response::HTTP_CREATED);
-    }
-
-    /**
-     * @param RequestContext $requestContext
-     * @return string
-     */
-    protected function getBaseUrl(Request $requestContext)
-    {
-        $port = '';
-        if ('https' == $requestContext->getScheme() && $requestContext->getHttpsPort() != 443) {
-            $port = ":{$requestContext->getHttpsPort()}";
-        }
-
-        if ('http' == $requestContext->getScheme() && $requestContext->getHttpPort() != 80) {
-            $port = ":{$requestContext->getHttpPort()}";
-        }
-
-        $baseUrl = $requestContext->getBaseUrl();
-        if ('.php' == substr($requestContext->getBaseUrl(), -4)) {
-            $baseUrl = pathinfo($requestContext->getBaseurl(), PATHINFO_DIRNAME);
-        }
-        $baseUrl = rtrim($baseUrl, '/\\');
-
-        return sprintf('%s://%s%s%s',
-            $requestContext->getScheme(),
-            $requestContext->getHost(),
-            $port,
-            $baseUrl
-        );
     }
 
     /**
