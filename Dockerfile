@@ -12,13 +12,14 @@ RUN buildDeps=" \
         libicu52 \
         zlib1g \
         libpng-dev \
-        libmagick++-dev \
+        imagemagick \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install \
         intl \
         mbstring \
         pdo_mysql \
         zip \
+        exif \
         gd \
     && apt-get purge -y --auto-remove $buildDeps
 
@@ -29,8 +30,7 @@ RUN pecl install \
     && docker-php-ext-enable --ini-name 05-opcache.ini \
         opcache \
     && docker-php-ext-enable --ini-name 20-apcu.ini \
-        apcu \
-    && docker-php-ext-enable imagick
+        apcu
 
 # Apache config
 RUN a2enmod rewrite
