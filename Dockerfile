@@ -20,6 +20,15 @@ RUN buildDeps=" \
         zip \
         gd \
     && apt-get purge -y --auto-remove $buildDeps
+
+RUN set -ex \
+    && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS imagemagick-dev libtool \
+    && export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" \
+    && pecl install imagick-3.4.3 \
+    && docker-php-ext-enable imagick \
+    && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \
+    && apk del .phpize-deps
+
 RUN pecl install \
         apcu-$APCU_VERSION \
     && docker-php-ext-enable --ini-name 05-opcache.ini \
