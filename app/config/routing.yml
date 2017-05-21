@@ -9,5 +9,5 @@ app:
 api_login_check:
   path: /login
 
-#_liip_imagine:
-#  resource: "@LiipImagineBundle/Resources/config/routing.xml"
+_liip_imagine:
+  resource: "@LiipImagineBundle/Resources/config/routing.yaml"

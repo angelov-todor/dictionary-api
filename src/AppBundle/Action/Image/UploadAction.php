@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AppBundle\Action\Image;
 
 use AppBundle\Entity\Image;
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -46,9 +47,10 @@ class UploadAction
                 'error' => 'Not found'
             ], 404);
         }
-        $imagine = $this->container->get('liip_imagine');
+        /** @var CacheManager $imagine */
+        $imagine = $this->container->get('liip_imagine.cache.manager');
 
-        return new BinaryFileResponse($imagine->filter($location, 'my_thumb'));
+        return new BinaryFileResponse($imagine->getBrowserPath($location, 'my_thumb'));
     }
 
     /**
