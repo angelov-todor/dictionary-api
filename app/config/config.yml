@@ -109,6 +109,7 @@ lexik_jwt_authentication:
   token_ttl: '%jwt_token_ttl%'
 
 liip_imagine:
+  driver: imagick
   # configure resolvers
   resolvers:
     # setup the default resolver
