@@ -58,7 +58,7 @@ class UploadAction
     /**
      * @Route(
      *     name="media",
-     *     path="/media/{resource}"
+     *     path="/assets/{resource}"
      * )
      * @Method("GET")
      *
