@@ -12,10 +12,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RequestContext;
 
 class UploadAction
 {
@@ -61,7 +63,7 @@ class UploadAction
      * @Method("GET")
      *
      * @param Request $request
-     * @return BinaryFileResponse|JsonResponse
+     * @return RedirectResponse|JsonResponse
      */
     public function serveAction(Request $request)
     {
@@ -75,7 +77,7 @@ class UploadAction
                 'error' => 'Not found'
             ], 404);
         }
-        $path = 'assets/oQE1jaQZjxZnjEBN21pyca0LGVMtsE.jpg';
+
         $filter = 'my_thumb';
 
         if (!$this->getCacheManager()->isStored($path, $filter, null)) {
@@ -95,9 +97,10 @@ class UploadAction
                 }
             }
         }
+//        $this->getBaseUrl($request);
         $resolved = $this->getCacheManager()->resolve($path, $filter, null);
-        var_dump($resolved);
-        return new BinaryFileResponse($resolved);
+
+        return new RedirectResponse($resolved, 301);
     }
 
     /**
@@ -138,6 +141,35 @@ class UploadAction
         $entityManager->flush($image);
 
         return new JsonResponse($image, Response::HTTP_CREATED);
+    }
+
+    /**
+     * @param RequestContext $requestContext
+     * @return string
+     */
+    protected function getBaseUrl(Request $requestContext)
+    {
+        $port = '';
+        if ('https' == $requestContext->getScheme() && $requestContext->getHttpsPort() != 443) {
+            $port = ":{$requestContext->getHttpsPort()}";
+        }
+
+        if ('http' == $requestContext->getScheme() && $requestContext->getHttpPort() != 80) {
+            $port = ":{$requestContext->getHttpPort()}";
+        }
+
+        $baseUrl = $requestContext->getBaseUrl();
+        if ('.php' == substr($requestContext->getBaseUrl(), -4)) {
+            $baseUrl = pathinfo($requestContext->getBaseurl(), PATHINFO_DIRNAME);
+        }
+        $baseUrl = rtrim($baseUrl, '/\\');
+
+        return sprintf('%s://%s%s%s',
+            $requestContext->getScheme(),
+            $requestContext->getHost(),
+            $port,
+            $baseUrl
+        );
     }
 
     /**
