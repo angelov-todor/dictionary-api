@@ -6,14 +6,13 @@ RUN buildDeps=" \
         libicu-dev \
         zlib1g-dev \
     " \
+    && add-apt-repository ppa:ondrej/php \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         $buildDeps \
         libicu52 \
         zlib1g \
         libpng-dev \
-        imagemagick \
-        php7.1-imagick \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install \
         intl \
