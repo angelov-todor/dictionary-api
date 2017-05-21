@@ -47,6 +47,7 @@ class UploadAction
             ], 404);
         }
         $file = \Gregwar\Image\Image::open($location)
+            ->useFallback(false)
             ->cropResize(50, 50)
             ->jpeg();
 
