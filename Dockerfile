@@ -8,8 +8,8 @@ RUN buildDeps=" \
     " \
 #    && apt-get install software-properties-common \
 #    && add-apt-repository ppa:ondrej/php \
-    echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu jessie main" > /etc/apt/sources.list.d/ondrej-php.list \
-    && echo "deb http://ppa.launchpad.net/ondrej/php-qa/ubuntu jessie main" > /etc/apt/sources.list.d/ondrej-php-qa.list \
+    echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" > /etc/apt/sources.list.d/ondrej-php.list \
+    && echo "deb http://ppa.launchpad.net/ondrej/php-qa/ubuntu xenial main" > /etc/apt/sources.list.d/ondrej-php-qa.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         $buildDeps \
