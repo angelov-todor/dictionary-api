@@ -30,9 +30,7 @@ RUN pecl install \
     && docker-php-ext-enable --ini-name 05-opcache.ini \
         opcache \
     && docker-php-ext-enable --ini-name 20-apcu.ini \
-        apcu \
-    && docker-php-ext-enable --ini-name 16-imagick.ini \
-        imagick
+        apcu
 
 # Apache config
 RUN a2enmod rewrite
