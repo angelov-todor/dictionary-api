@@ -6,8 +6,8 @@ RUN buildDeps=" \
         libicu-dev \
         zlib1g-dev \
     " \
-    && apt-get install software-properties-common \
-    && add-apt-repository ppa:ondrej/php \
+#    && apt-get install software-properties-common \
+#    && add-apt-repository ppa:ondrej/php \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         $buildDeps \
