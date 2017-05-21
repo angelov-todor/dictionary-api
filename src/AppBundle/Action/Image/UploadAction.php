@@ -4,13 +4,17 @@ declare(strict_types=1);
 namespace AppBundle\Action\Image;
 
 use AppBundle\Entity\Image;
+use Liip\ImagineBundle\Exception\Binary\Loader\NotLoadableException;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use Liip\ImagineBundle\Imagine\Data\DataManager;
+use Liip\ImagineBundle\Imagine\Filter\FilterManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UploadAction
@@ -23,6 +27,30 @@ class UploadAction
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
+    }
+
+    /**
+     * @return CacheManager
+     */
+    protected function getCacheManager()
+    {
+        return $this->container->get('liip_imagine.cache.manager');
+    }
+
+    /**
+     * @return DataManager
+     */
+    protected function getDataManager()
+    {
+        return $this->container->get('liip_imagine.data.manager');
+    }
+
+    /**
+     * @return FilterManager
+     */
+    protected function getFilterManager()
+    {
+        return $this->container->get('liip_imagine.filter.manager');
     }
 
     /**
@@ -39,18 +67,36 @@ class UploadAction
     {
         $image = $request->get('resource');
 
-        $location = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $image;
-        if (!file_exists($location)) {
+        $path = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $image;
+        if (!file_exists($path)) {
             return new JsonResponse([
-                'location' => $location,
+                'location' => $path,
                 'cwd' => getcwd(),
                 'error' => 'Not found'
             ], 404);
         }
-        /** @var CacheManager $imagine */
-        $imagine = $this->container->get('liip_imagine.cache.manager');
 
-        return new BinaryFileResponse($imagine->getBrowserPath($location, 'my_thumb'));
+        $filter = 'my_thumb';
+
+        if (!$this->getCacheManager()->isStored($path, $filter, null)) {
+            try {
+                $binary = $this->getDataManager()->find($filter, $path);
+                $this->getCacheManager()->store(
+                    $this->getFilterManager()->applyFilter($binary, $filter),
+                    $path,
+                    $filter,
+                    null
+                );
+            } catch (NotLoadableException $e) {
+                if ($defaultImageUrl = $this->getDataManager()->getDefaultImageUrl($filter)) {
+                    $path = $defaultImageUrl;
+                } else {
+                    throw new NotFoundHttpException('Source image could not be found', $e);
+                }
+            }
+        }
+var_dump($this->getCacheManager()->resolve($path, $filter, null));
+        return new BinaryFileResponse($this->getCacheManager()->resolve($path, $filter, null));
     }
 
     /**
