@@ -6,7 +6,7 @@ RUN buildDeps=" \
         libicu-dev \
         zlib1g-dev \
     " \
-    && add-apt-repository ppa:ondrej/php \
+    && LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         $buildDeps \
