@@ -13,6 +13,7 @@ RUN buildDeps=" \
         zlib1g \
         libpng-dev \
         imagemagick \
+        php7.1-imagick \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install \
         intl \
@@ -20,13 +21,10 @@ RUN buildDeps=" \
         pdo_mysql \
         zip \
         exif \
-        gd \
     && apt-get purge -y --auto-remove $buildDeps
-
 
 RUN pecl install \
         apcu-$APCU_VERSION \
-        imagick \
     && docker-php-ext-enable --ini-name 05-opcache.ini \
         opcache \
     && docker-php-ext-enable --ini-name 20-apcu.ini \
