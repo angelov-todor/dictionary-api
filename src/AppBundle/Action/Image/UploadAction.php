@@ -100,8 +100,8 @@ class UploadAction
                 );
             } catch (NotLoadableException $e) {
 
-                var_dump($e);
-                die('1');
+//                var_dump($e);
+//                die('1');
                 if ($defaultImageUrl = $this->getDataManager()->getDefaultImageUrl($filter)) {
                     $path = $defaultImageUrl;
                 } else {
@@ -110,8 +110,8 @@ class UploadAction
             }
         }
         $resolved = $this->getCacheManager()->resolve($path, $filter, null);
-        var_dump($resolved);
-        die('2');
+//        var_dump($resolved);
+//        die('2');
         return new RedirectResponse($resolved, 301);
     }
 
