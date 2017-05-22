@@ -77,7 +77,8 @@ class UploadAction
     {
         $image = $request->get('resource');
 
-        $path = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $image;
+//        $path = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $image;
+        $path = 'assets' . DIRECTORY_SEPARATOR . $image;
         if (!file_exists($path)) {
             return new JsonResponse([
                 'location' => $path,
