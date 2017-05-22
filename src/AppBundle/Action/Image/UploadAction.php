@@ -112,6 +112,53 @@ class UploadAction
 
     /**
      * @Route(
+     *     name="large",
+     *     path="/large/{resource}"
+     * )
+     * @Method("GET")
+     *
+     * @param Request $request
+     * @return RedirectResponse|JsonResponse|Response
+     */
+    public function largeAction(Request $request): Response
+    {
+        $image = $request->get('resource');
+
+        $path = 'assets' . DIRECTORY_SEPARATOR . $image;
+        if (!file_exists($path)) {
+            return new JsonResponse([
+                'location' => $path,
+                'cwd' => getcwd(),
+                'error' => 'Not found'
+            ], 404);
+        }
+
+        $filter = 'large';
+
+        if (!$this->getCacheManager()->isStored($path, $filter, null)) {
+            try {
+                $binary = $this->getDataManager()->find($filter, $path);
+                $this->getCacheManager()->store(
+                    $this->getFilterManager()->applyFilter($binary, $filter),
+                    $path,
+                    $filter,
+                    null
+                );
+            } catch (NotLoadableException $e) {
+
+                if ($defaultImageUrl = $this->getDataManager()->getDefaultImageUrl($filter)) {
+                    $path = $defaultImageUrl;
+                } else {
+                    throw new NotFoundHttpException('Source image could not be found', $e);
+                }
+            }
+        }
+        $resolved = $this->getCacheManager()->resolve($path, $filter, null);
+        return new RedirectResponse($resolved, 301);
+    }
+
+    /**
+     * @Route(
      *     name="images_upload",
      *     path="/images-upload"
      * )

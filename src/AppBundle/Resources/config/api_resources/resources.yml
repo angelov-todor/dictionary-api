@@ -133,6 +133,8 @@ AppBundle\Entity\Image:
         produces: ["application/json","application/hal+json"]
     thumb:
       route_name: 'thumb'
+    large:
+      route_name: 'large'
   collectionOperations:
     get:
       method: 'GET'
