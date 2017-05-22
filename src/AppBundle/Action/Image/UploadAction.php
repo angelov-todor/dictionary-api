@@ -65,19 +65,18 @@ class UploadAction
 
     /**
      * @Route(
-     *     name="media",
-     *     path="/serve/{resource}"
+     *     name="thumb",
+     *     path="/thumb/{resource}"
      * )
      * @Method("GET")
      *
      * @param Request $request
      * @return RedirectResponse|JsonResponse|Response
      */
-    public function serveAction(Request $request): Response
+    public function thumbAction(Request $request): Response
     {
         $image = $request->get('resource');
 
-//        $path = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $image;
         $path = 'assets' . DIRECTORY_SEPARATOR . $image;
         if (!file_exists($path)) {
             return new JsonResponse([
@@ -87,7 +86,7 @@ class UploadAction
             ], 404);
         }
 
-        $filter = 'my_thumb';
+        $filter = 'thumb';
 
         if (!$this->getCacheManager()->isStored($path, $filter, null)) {
             try {
@@ -100,8 +99,6 @@ class UploadAction
                 );
             } catch (NotLoadableException $e) {
 
-//                var_dump($e);
-//                die('1');
                 if ($defaultImageUrl = $this->getDataManager()->getDefaultImageUrl($filter)) {
                     $path = $defaultImageUrl;
                 } else {
@@ -110,8 +107,6 @@ class UploadAction
             }
         }
         $resolved = $this->getCacheManager()->resolve($path, $filter, null);
-//        var_dump($resolved);
-//        die('2');
         return new RedirectResponse($resolved, 301);
     }
 
@@ -141,12 +136,13 @@ class UploadAction
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $location = 'assets' . DIRECTORY_SEPARATOR . $this->getToken(40) . '.' . $ext;
+        $uuidName = $this->getToken(40) . '.' . $ext;
+        $location = 'assets' . DIRECTORY_SEPARATOR . $uuidName;
         $file = getcwd() . DIRECTORY_SEPARATOR . $location;
 
         $image = new Image();
         $this->base64ToJpeg($data, $file);
-        $image->setSrc($location);
+        $image->setSrc($uuidName);
 
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $entityManager->persist($image);

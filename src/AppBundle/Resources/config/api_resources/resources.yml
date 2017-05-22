@@ -131,8 +131,8 @@ AppBundle\Entity\Image:
         summary: "Upload an image"
         consumes: ["application/json"]
         produces: ["application/json","application/hal+json"]
-    media:
-      route_name: 'media'
+    thumb:
+      route_name: 'thumb'
   collectionOperations:
     get:
       method: 'GET'
