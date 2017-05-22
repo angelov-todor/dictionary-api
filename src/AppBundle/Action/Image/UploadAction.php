@@ -101,7 +101,7 @@ class UploadAction
                 if ($defaultImageUrl = $this->getDataManager()->getDefaultImageUrl($filter)) {
                     $path = $defaultImageUrl;
                 } else {
-                    var_dump($e);
+                    var_dump($e);die;
                     throw new NotFoundHttpException('Source image could not be found', $e);
                 }
             }
