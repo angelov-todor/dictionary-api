@@ -98,16 +98,21 @@ class UploadAction
                     null
                 );
             } catch (NotLoadableException $e) {
+
+                var_dump($e);
+                die('1');
                 if ($defaultImageUrl = $this->getDataManager()->getDefaultImageUrl($filter)) {
                     $path = $defaultImageUrl;
                 } else {
-                    var_dump($e);die;
+
                     throw new NotFoundHttpException('Source image could not be found', $e);
                 }
             }
         }
-
-        return new RedirectResponse($this->getCacheManager()->resolve($path, $filter, null), 301);
+        $resolved = $this->getCacheManager()->resolve($path, $filter, null);
+        var_dump($resolved);
+        die('2');
+        return new RedirectResponse($resolved, 301);
     }
 
     /**
