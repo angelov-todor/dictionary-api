@@ -78,13 +78,13 @@ class UploadAction
         $image = $request->get('resource');
 
         $path = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $image;
-        if (!file_exists($path)) {
+//        if (!file_exists($path)) {
             return new JsonResponse([
                 'location' => $path,
                 'cwd' => getcwd(),
                 'error' => 'Not found'
             ], 404);
-        }
+//        }
 
         $filter = 'my_thumb';
 
