@@ -34,7 +34,8 @@
         "nelmio/cors-bundle": "^1.4",
         "phpdocumentor/reflection-docblock": "^3.0",
         "friendsofsymfony/user-bundle": "2.0.x-dev",
-        "lexik/jwt-authentication-bundle": "v2.2.0"
+        "lexik/jwt-authentication-bundle": "v2.2.0",
+        "liip/imagine-bundle": "2.0.x-dev"
     },
     "require-dev": {
         "api-platform/schema-generator": "^1.2",

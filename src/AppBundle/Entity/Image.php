@@ -39,6 +39,14 @@ class Image
     protected $imageMetadata;
 
     /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
      * @return string
      */
     public function getSrc(): string

@@ -107,3 +107,35 @@ lexik_jwt_authentication:
   public_key_path: '%jwt_public_key_path%'
   pass_phrase: '%jwt_key_pass_phrase%'
   token_ttl: '%jwt_token_ttl%'
+
+liip_imagine:
+  driver: imagick
+  # configure resolvers
+  resolvers:
+    # setup the default resolver
+    default:
+      # use the default web path
+      web_path: ~
+  # your filter sets are defined here
+  filter_sets:
+    # use the default cache configuration
+    cache: ~
+    # the name of the "filter set"
+    thumb:
+        # adjust the image quality to 75%
+      quality: 75
+      # list of transformations to apply (the "filters")
+      filters:
+        # create a thumbnail: set size to 120x90 and use the "outbound" mode
+        # to crop the image when the size ratio of the input differs
+        thumbnail: { size: [120, 90], mode: outbound }
+    large:
+      # list of transformations to apply (the "filters")
+      filters:
+        # create a thumbnail: set size to 120x90 and use the "outbound" mode
+        # to crop the image when the size ratio of the input differs
+        thumbnail: { size: [640, 480], mode: outbound }
+#  loaders:
+#    default:
+#      filesystem:
+#        data_root: "%kernel.root_dir%"
