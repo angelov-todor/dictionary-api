@@ -131,10 +131,8 @@ AppBundle\Entity\Image:
         summary: "Upload an image"
         consumes: ["application/json"]
         produces: ["application/json","application/hal+json"]
-    thumb:
-      route_name: 'thumb'
-    large:
-      route_name: 'large'
+    dynamic-image:
+      route_name: 'dynamic-image'
   collectionOperations:
     get:
       method: 'GET'
