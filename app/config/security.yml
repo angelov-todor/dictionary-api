@@ -31,7 +31,7 @@ security:
 #            anonymous: ~
     access_control:
       - { path: ^/authenticate, method: POST, role: IS_AUTHENTICATED_ANONYMOUSLY }
-      - { path: ^/serve, method: GET, role: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/thumb, method: GET, role: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/users, method: POST, role: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/docs.json, role: IS_AUTHENTICATED_ANONYMOUSLY }
