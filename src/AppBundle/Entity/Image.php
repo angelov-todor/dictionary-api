@@ -3,15 +3,21 @@ declare(strict_types=1);
 
 namespace AppBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 use \Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Image
  * @ORM\Table(name="images")
  * @ORM\Entity
+ * @ApiResource(attributes={
+ *     "normalization_context"={"groups"={"read"}},
+ *     "denormalization_context"={"groups"={"write"}}
+ * })
  */
 class Image
 {
@@ -35,6 +41,7 @@ class Image
      * @var ImageMetadata
      *
      * @ORM\OneToMany(targetEntity="ImageMetadata", mappedBy="image")
+     * @Groups({"read"})
      */
     protected $imageMetadata;
 
