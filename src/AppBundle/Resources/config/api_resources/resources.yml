@@ -136,6 +136,8 @@ AppBundle\Entity\Image:
   collectionOperations:
     get:
       method: 'GET'
+      normalization_context:
+        groups: ['images']
 AppBundle\Entity\ImageMetadata: ~
 
 AppBundle\Entity\Dictionary\IncorrectForm:
