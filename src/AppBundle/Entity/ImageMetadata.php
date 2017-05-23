@@ -29,7 +29,6 @@ class ImageMetadata
      *
      * @ORM\ManyToOne(targetEntity="Image", inversedBy="imageMetadata")
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
-     * @Groups({"images"})
      */
     protected $image;
 
@@ -39,6 +38,7 @@ class ImageMetadata
      *
      * @ORM\ManyToOne(targetEntity="Metadata")
      * @ORM\JoinColumn(name="metadata_id", referencedColumnName="id")
+     * @Groups({"images"})
      */
     protected $metadata;
 
@@ -46,7 +46,7 @@ class ImageMetadata
      * @var string
      *
      * @ORM\Column(name="value", type="string")
-     * @Groups({"read"})
+     * @Groups({"images"})
      */
     protected $value;
 
