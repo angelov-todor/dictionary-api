@@ -20,7 +20,7 @@ class ImageMetadata
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @Groups({"images"})
+     * @Groups({"get_image"})
      */
     protected $id;
 
@@ -38,7 +38,7 @@ class ImageMetadata
      *
      * @ORM\ManyToOne(targetEntity="Metadata")
      * @ORM\JoinColumn(name="metadata_id", referencedColumnName="id")
-     * @Groups({"images"})
+     * @Groups({"get_image"})
      */
     protected $metadata;
 
@@ -46,7 +46,7 @@ class ImageMetadata
      * @var string
      *
      * @ORM\Column(name="value", type="string")
-     * @Groups({"images"})
+     * @Groups({"get_image"})
      */
     protected $value;
 
