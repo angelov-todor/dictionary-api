@@ -69,7 +69,7 @@ AppBundle\Entity\Image:
     get:
       method: 'GET'
       normalization_context:
-        groups: ['images']
+        groups: ['get_image']
     images_search:
       route_name: 'images_search'
       swagger_context:
