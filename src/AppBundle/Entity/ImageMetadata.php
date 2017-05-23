@@ -20,7 +20,7 @@ class ImageMetadata
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @Groups({"read"})
+     * @Groups({"images"})
      */
     protected $id;
 
@@ -29,7 +29,7 @@ class ImageMetadata
      *
      * @ORM\ManyToOne(targetEntity="Image", inversedBy="imageMetadata")
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
-     * @Groups({"read"})
+     * @Groups({"images"})
      */
     protected $image;
 

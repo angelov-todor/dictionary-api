@@ -15,8 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Table(name="images")
  * @ORM\Entity
  * @ApiResource(attributes={
- *     "normalization_context"={"groups"={"read"}},
- *     "denormalization_context"={"groups"={"write"}}
+ *     "normalization_context"={"groups"={"images"}}
  * })
  */
 class Image
@@ -34,6 +33,7 @@ class Image
      * @var string
      *
      * @ORM\Column(name="src", type="string")
+     * @Groups({"images"})
      */
     protected $src;
 
@@ -41,7 +41,7 @@ class Image
      * @var ImageMetadata
      *
      * @ORM\OneToMany(targetEntity="ImageMetadata", mappedBy="image")
-     * @Groups({"read"})
+     * @Groups({"images"})
      */
     protected $imageMetadata;
 
