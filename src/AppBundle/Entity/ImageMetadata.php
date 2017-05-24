@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -10,6 +11,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *
  * @ORM\Table(name="image_metadata")
  * @ORM\Entity
+ * @ApiResource(attributes={
+ *     "normalization_context"={"groups"={"create_image_metadata"}}
+ * })
  */
 class ImageMetadata
 {
@@ -20,7 +24,7 @@ class ImageMetadata
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @Groups({"get_image"})
+     * @Groups({"get_image", "create_image_metadata"})
      */
     protected $id;
 
@@ -38,7 +42,7 @@ class ImageMetadata
      *
      * @ORM\ManyToOne(targetEntity="Metadata")
      * @ORM\JoinColumn(name="metadata_id", referencedColumnName="id")
-     * @Groups({"get_image"})
+     * @Groups({"get_image", "create_image_metadata"})
      */
     protected $metadata;
 
@@ -46,7 +50,7 @@ class ImageMetadata
      * @var string
      *
      * @ORM\Column(name="value", type="string")
-     * @Groups({"get_image"})
+     * @Groups({"get_image", "create_image_metadata"})
      */
     protected $value;
 
