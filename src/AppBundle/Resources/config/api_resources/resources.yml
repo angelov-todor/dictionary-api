@@ -3,12 +3,12 @@ AppBundle\Entity\Dictionary\Word:
     get:
       method: 'GET' # nothing more to add if we want to keep the default controller
       normalization_context:
-        groups: ['get_word']
+        groups: ['list_words']
   itemOperations:
     get:
       method: 'GET'
       normalization_context:
-        groups: ['list_words']
+        groups: ['get_word']
     rhymeform:
       route_name: 'rhymeform'
       swagger_context:
