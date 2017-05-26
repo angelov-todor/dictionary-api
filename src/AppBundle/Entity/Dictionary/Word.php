@@ -6,6 +6,7 @@ namespace AppBundle\Entity\Dictionary;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity
@@ -20,54 +21,63 @@ class Word
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"get_word", "list_words"})
      */
     private $id;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({"get_word", "list_words"})
      */
     private $name;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({"get_word", "list_words"})
      */
     private $nameStressed;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=120, nullable=true)
+     * @Groups({"get_word", "list_words"})
      */
     private $nameBroken;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=80, nullable=true)
+     * @Groups({"get_word", "list_words"})
      */
     private $nameCondensed;
 
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"get_word", "list_words"})
      */
     private $meaning;
 
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"get_word", "list_words"})
      */
     private $synonyms;
 
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"get_word", "list_words"})
      */
     private $classification;
 
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"get_word", "list_words"})
      */
     private $etymology;
 
@@ -75,18 +85,21 @@ class Word
      * @var WordType
      * @ORM\ManyToOne(targetEntity="WordType")
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
+     * @Groups({"get_word", "list_words"})
      */
     private $type;
 
     /**
      * @var IncorrectForm[]
      * @ORM\OneToMany(targetEntity="IncorrectForm", mappedBy="correctWord")
+     * @Groups({"get_word", "list_words"})
      */
     private $incorrectForms;
 
     /**
      * @var DerivativeForm
      * @ORM\OneToMany(targetEntity="DerivativeForm", mappedBy="baseWord")
+     * @Groups({"get_word", "list_words"})
      */
     private $derivativeForms;
 
