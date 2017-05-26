@@ -3,10 +3,14 @@ declare(strict_types=1);
 
 namespace AppBundle\Entity\Dictionary;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ApiResource(attributes={
+ *     "normalization_context"={"groups"={"get_word"}}
+ * })
  */
 class WordType
 {

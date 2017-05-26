@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AppBundle\Entity\Dictionary;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity
@@ -16,12 +17,14 @@ class IncorrectForm
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"get_word"})
      */
     private $id;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({"get_word"})
      */
     private $name;
 

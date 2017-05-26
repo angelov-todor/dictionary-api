@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AppBundle\Entity\Dictionary;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity
@@ -15,36 +16,42 @@ class DerivativeForm
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"get_word"})
      */
     private $id;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({"get_word"})
      */
     private $name;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=120, nullable=true)
+     * @Groups({"get_word"})
      */
     private $nameBroken;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=80, nullable=true)
+     * @Groups({"get_word"})
      */
     private $nameCondensed;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Groups({"get_word"})
      */
     private $description;
 
     /**
      * @var string
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"get_word"})
      */
     private $isInfinitive;
 

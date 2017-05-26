@@ -2,6 +2,8 @@ AppBundle\Entity\Dictionary\Word:
   collectionOperations:
     get:
       method: 'GET' # nothing more to add if we want to keep the default controller
+      normalization_context:
+        groups: ['get_word']
   itemOperations:
     get:
       method: 'GET'
