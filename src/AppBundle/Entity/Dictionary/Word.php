@@ -85,21 +85,21 @@ class Word
      * @var WordType
      * @ORM\ManyToOne(targetEntity="WordType")
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
-     * @Groups({"get_word", "list_words"})
+     * @Groups({"get_word"})
      */
     private $type;
 
     /**
      * @var IncorrectForm[]
      * @ORM\OneToMany(targetEntity="IncorrectForm", mappedBy="correctWord")
-     * @Groups({"get_word", "list_words"})
+     * @Groups({"get_word"})
      */
     private $incorrectForms;
 
     /**
      * @var DerivativeForm
      * @ORM\OneToMany(targetEntity="DerivativeForm", mappedBy="baseWord")
-     * @Groups({"get_word", "list_words"})
+     * @Groups({"get_word"})
      */
     private $derivativeForms;
 
