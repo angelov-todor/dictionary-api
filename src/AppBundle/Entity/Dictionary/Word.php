@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity
  * @ApiResource(attributes={
- *     "normalization_context"={"groups"={"get_word"}}
+ *     "normalization_context"={"groups"={"get_word", "list_words"}}
  * })
  */
 class Word
@@ -85,21 +85,21 @@ class Word
      * @var WordType
      * @ORM\ManyToOne(targetEntity="WordType")
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
-     * @Groups({"get_word"})
+     * @Groups({"get_word", "list_words"})
      */
     private $type;
 
     /**
      * @var IncorrectForm[]
      * @ORM\OneToMany(targetEntity="IncorrectForm", mappedBy="correctWord")
-     * @Groups({"get_word"})
+     * @Groups({"get_word", "list_words"})
      */
     private $incorrectForms;
 
     /**
      * @var DerivativeForm
      * @ORM\OneToMany(targetEntity="DerivativeForm", mappedBy="baseWord")
-     * @Groups({"get_word"})
+     * @Groups({"get_word", "list_words"})
      */
     private $derivativeForms;
 
