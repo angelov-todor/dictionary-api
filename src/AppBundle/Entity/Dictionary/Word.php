@@ -11,7 +11,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity
  * @ApiResource(attributes={
- *     "normalization_context"={"groups"={"get_word", "list_words"}}
+ *     "normalization_context"={"groups"={"get_word", "list_words"}},
+ *     "filters"={"word.search"}}
  * })
  */
 class Word
