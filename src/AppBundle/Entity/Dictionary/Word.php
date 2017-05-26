@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ApiResource(attributes={
- *     "normalization_context"={"groups"={"get_word"}}
+ *     "normalization_context"={"groups"={"get_word", "list_words"}}
  * })
  */
 class Word
