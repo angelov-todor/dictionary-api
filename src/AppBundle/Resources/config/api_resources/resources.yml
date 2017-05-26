@@ -68,6 +68,8 @@ AppBundle\Entity\Image:
   itemOperations:
     get:
       method: 'GET'
+      normalization_context:
+        groups: ['get_image']
     images_search:
       route_name: 'images_search'
       swagger_context:
@@ -136,8 +138,15 @@ AppBundle\Entity\Image:
   collectionOperations:
     get:
       method: 'GET'
-AppBundle\Entity\ImageMetadata: ~
-
+AppBundle\Entity\ImageMetadata:
+  itemOperations: ~
+  collectionOperations:
+    get:
+      method: 'GET'
+    post:
+      method: 'POST'
+      normalization_context:
+        groups: ['create_image_metadata']
 AppBundle\Entity\Dictionary\IncorrectForm:
   collectionOperations:
     get:
