@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -50,6 +51,27 @@ class Metadata
     protected $type = self::TYPE_TEXT;
 
     /**
+     * @var Metadata
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Metadata", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    protected $parent;
+
+    /**
+     * One Category has Many Categories.
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Metadata", mappedBy="parent")
+     */
+    protected $children;
+
+    /**
+     * Metadata constructor.
+     */
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+    }
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -93,6 +115,24 @@ class Metadata
             throw new \InvalidArgumentException('Invalid type given for metadata');
         }
         $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return Metadata
+     */
+    public function getParent(): Metadata
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param null|Metadata $parent
+     * @return Metadata
+     */
+    public function setParent(?Metadata $parent): Metadata
+    {
+        $this->parent = $parent;
         return $this;
     }
 }
