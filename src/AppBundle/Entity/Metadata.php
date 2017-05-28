@@ -58,19 +58,6 @@ class Metadata
     protected $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Metadata", mappedBy="parent")
-     */
-    protected $children;
-
-    /**
-     * Metadata constructor.
-     */
-    public function __construct()
-    {
-        $this->children = new ArrayCollection();
-    }
-
-    /**
      * @return int
      */
     public function getId(): int
