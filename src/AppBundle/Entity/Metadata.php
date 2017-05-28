@@ -119,9 +119,9 @@ class Metadata
     }
 
     /**
-     * @return Metadata
+     * @return null|Metadata
      */
-    public function getParent(): Metadata
+    public function getParent(): ?Metadata
     {
         return $this->parent;
     }
