@@ -52,7 +52,7 @@ class Metadata
 
     /**
      * @var null|Metadata
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Metadata")
+     * @ORM\ManyToOne(targetEntity="Metadata")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
