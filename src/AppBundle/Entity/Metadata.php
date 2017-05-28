@@ -51,17 +51,11 @@ class Metadata
     protected $type = self::TYPE_TEXT;
 
     /**
-     * @var Metadata
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Metadata", inversedBy="children")
+     * @var null|Metadata
+     * @ORM\ManyToOne(targetEntity="Metadata")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
-
-    /**
-     * One Category has Many Categories.
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Metadata", mappedBy="parent")
-     */
-    protected $children;
 
     /**
      * Metadata constructor.
