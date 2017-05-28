@@ -52,10 +52,15 @@ class Metadata
 
     /**
      * @var Metadata
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Metadata")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Metadata", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Metadata", mappedBy="parent")
+     */
+    protected $children;
 
     /**
      * Metadata constructor.
