@@ -127,6 +127,7 @@ class Metadata
     public function setParent(?Metadata $parent): Metadata
     {
         $this->parent = $parent;
+        var_dump($parent);die;
         return $this;
     }
 }
