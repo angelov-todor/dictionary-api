@@ -51,7 +51,7 @@ class Metadata
     protected $type = self::TYPE_TEXT;
 
     /**
-     * @var null|Metadata
+     * @var Metadata
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Metadata")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
@@ -121,13 +121,12 @@ class Metadata
     }
 
     /**
-     * @param null|Metadata $parent
+     * @param Metadata $parent
      * @return Metadata
      */
     public function setParent(?Metadata $parent): Metadata
     {
         $this->parent = $parent;
-        var_dump($parent);die;
         return $this;
     }
 }
