@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -52,7 +51,7 @@ class Metadata
 
     /**
      * @var Metadata
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Metadata", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Metadata")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
