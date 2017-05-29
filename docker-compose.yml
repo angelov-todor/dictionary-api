@@ -1,18 +1,52 @@
-web:
-    build: .
-    environment:
-        SYMFONY_ENV: dev
-#    links:
-#        - database
-    volumes:
-        - .:/app
-    ports:
-        - 8081:80
+version: '3'
 
-#database:
-#    image: mysql
-#    environment:
-#        MYSQL_ROOT_PASSWORD: changeme
-#        MYSQL_DATABASE: api_platform
-#        MYSQL_USER: api_platform
-#        MYSQL_PASSWORD: api_platform
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - db
+    environment:
+      # Change to prod in production
+      - SYMFONY_ENV=dev
+    volumes:
+      # Comment out the next line in production
+      - ./:/srv/api-platform:rw
+      # This is for assets:install
+      - ./web:/srv/api-platform/web:rw
+      # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
+      - /srv/api-platform/var
+      - /srv/api-platform/var/cache
+      - /srv/api-platform/var/logs
+      - /srv/api-platform/var/sessions
+      - /srv/api-platform/vendor
+  db:
+    build:
+      context: ./docker/db
+      dockerfile: ./Dockerfile
+    environment:
+      - MYSQL_DATABASE=api_platform
+      # You should definitely change the password in production
+      - MYSQL_PASSWORD=api_platform
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_USER=api_platform
+    volumes:
+      - db-data:/var/lib/mysql:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/db/data:/var/lib/mysql:rw
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: ./Dockerfile
+    ports:
+      - "80:80"
+      # - "443:443"
+    volumes:
+      # Comment out the next line in production
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./web:/srv/api-platform/web:ro
+
+volumes:
+  app-web: {}
+  db-data: {}
