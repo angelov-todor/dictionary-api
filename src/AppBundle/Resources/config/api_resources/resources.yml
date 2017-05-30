@@ -66,9 +66,17 @@ AppBundle\Entity\Dictionary\WordType:
 
 AppBundle\Entity\Metadata:
   itemOperations: ~
-  collectionOperations: ~
+  collectionOperations:
+    get:
+      method: 'GET'
+      normalization_context:
+        groups: ['list_metadata']
+    post:
+      method: 'POST'
   attributes:
     enable_max_depth: true
+    normalization_context:
+      groups: ['list_metadata']
 
 AppBundle\Entity\Image:
   itemOperations:

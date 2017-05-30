@@ -30,7 +30,7 @@ class Metadata
      * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @Groups({"get_image", "create_image_metadata"})
+     * @Groups({"get_image", "create_image_metadata", "list_metadata"})
      */
     protected $id;
 
@@ -38,7 +38,7 @@ class Metadata
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=50, nullable=false)
-     * @Groups({"get_image", "create_image_metadata"})
+     * @Groups({"get_image", "create_image_metadata", "list_metadata"})
      */
     protected $name;
 
@@ -46,7 +46,7 @@ class Metadata
      * @var string
      *
      * @ORM\Column(name="type", type="string", columnDefinition="ENUM('number', 'text')", nullable=false)
-     * @Groups({"get_image", "create_image_metadata"})
+     * @Groups({"get_image", "create_image_metadata", "list_metadata"})
      */
     protected $type = self::TYPE_TEXT;
 
@@ -55,6 +55,7 @@ class Metadata
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Metadata")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      * @MaxDepth(2)
+     * @Groups({"list_metadata"})
      */
     protected $parent;
 
