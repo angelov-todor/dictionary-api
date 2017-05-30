@@ -47,7 +47,7 @@ class Metadata
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", columnDefinition="ENUM('number', 'text')", nullable=false)
+     * @ORM\Column(name="type", type="string", columnDefinition="ENUM('number', 'text', 'bool')", nullable=false)
      * @Groups({"get_image", "create_image_metadata", "list_metadata"})
      */
     protected $type = self::TYPE_TEXT;
