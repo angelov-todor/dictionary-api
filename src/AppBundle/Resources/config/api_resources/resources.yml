@@ -64,7 +64,11 @@ AppBundle\Entity\Dictionary\WordType:
     get:
       method: 'GET'
 
-AppBundle\Entity\Metadata: ~
+AppBundle\Entity\Metadata:
+  itemOperations: ~
+  collectionOperations: ~
+  attributes:
+    enable_max_depth: true
 
 AppBundle\Entity\Image:
   itemOperations:

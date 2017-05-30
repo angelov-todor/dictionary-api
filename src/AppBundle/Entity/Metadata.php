@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 
 /**
@@ -53,6 +54,7 @@ class Metadata
      * @var Metadata
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Metadata")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @MaxDepth(2)
      */
     protected $parent;
 
