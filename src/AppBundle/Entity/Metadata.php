@@ -18,10 +18,12 @@ class Metadata
 {
     const TYPE_NUMBER = 'number';
     const TYPE_TEXT = 'text';
+    const TYPE_BOOLEAN = 'bool';
 
     protected static $types = [
         self::TYPE_NUMBER,
-        self::TYPE_TEXT
+        self::TYPE_TEXT,
+        self::TYPE_BOOLEAN
     ];
 
     /**
