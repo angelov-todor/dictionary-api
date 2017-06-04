@@ -22,7 +22,7 @@ services:
 
   'AppBundle\Action\Image\EnrichAction':
     class: 'AppBundle\Action\Image\EnrichAction'
-     arguments: [ '@doctrine.orm.entity_manager', '@api_platform.serializer' ]
+    arguments: [ '@doctrine.orm.entity_manager', '@api_platform.serializer' ]
 
   app.documentation.normalizer:
     class: AppBundle\Documentation\DocumentationNormalizer
