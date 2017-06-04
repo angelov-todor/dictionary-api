@@ -26,7 +26,7 @@ class Image
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @Groups({"get_image"})
+     * @Groups({"get_image", "get_enrichment"})
      */
     protected $id;
 
@@ -34,7 +34,7 @@ class Image
      * @var string
      *
      * @ORM\Column(name="src", type="string")
-     * @Groups({"get_image"})
+     * @Groups({"get_image", "get_enrichment"})
      */
     protected $src;
 
