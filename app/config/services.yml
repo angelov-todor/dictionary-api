@@ -20,6 +20,10 @@ services:
     class: 'AppBundle\Action\Image\UploadAction'
     arguments: [ '@service_container' ]
 
+  'AppBundle\Action\Image\EnrichAction':
+    class: 'AppBundle\Action\Image\EnrichAction'
+    arguments: [ '@doctrine.orm.default_entity_manager' ]
+
   app.documentation.normalizer:
     class: AppBundle\Documentation\DocumentationNormalizer
     decorates: api_platform.swagger.normalizer.documentation
