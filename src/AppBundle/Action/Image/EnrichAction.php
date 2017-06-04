@@ -6,7 +6,6 @@ namespace AppBundle\Action\Image;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EnrichAction
@@ -28,13 +27,11 @@ class EnrichAction
      * )
      * @Method("GET")
      *
-     * @param Request $request
      * @return mixed
      */
-    public function enrichAction(Request $request)
+    public function __invoke()
     {
         $em = $this->entityManager;
-        $qb = $em->createQueryBuilder();
 
         $imageCount = $em->createQueryBuilder()
             ->select('count(i.id)')
@@ -42,13 +39,13 @@ class EnrichAction
             ->getQuery()
             ->getSingleScalarResult();
 
-
         $randomImage = $em->createQueryBuilder()
             ->select('i')
             ->from('AppBundle\Entity\Image', 'i')
             ->setMaxResults(1)
-            ->setFirstResult(rand(1, $imageCount))
-            ->getQuery()->getResult();
+            ->setFirstResult(rand(1, intval($imageCount)))
+            ->getQuery()
+            ->getResult();
 
         $metadataCount = $em->createQueryBuilder()
             ->select('count(m)')
