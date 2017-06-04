@@ -3,20 +3,33 @@ declare(strict_types=1);
 
 namespace AppBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+/**
+ * Class Enrichment
+ * @package AppBundle\Entity
+ * @ApiResource(
+ *     "normalization_context"={"groups"={"get_enrichment"}}
+ * )
+ */
 class Enrichment
 {
     /**
      * @var Image
+     * @Groups({"get_enrichment"})
      */
     protected $image;
 
     /**
      * @var Metadata
+     * @Groups({"get_enrichment"})
      */
     protected $metadata;
 
     /**
      * @var string
+     * @Groups({"get_enrichment"})
      */
     protected $question;
 

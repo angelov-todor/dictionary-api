@@ -152,6 +152,10 @@ AppBundle\Entity\Image:
   collectionOperations:
     get:
       method: 'GET'
+    enrich:
+      route_name: 'enrich'
+      normalization_context:
+              groups: ['get_enrichment']
 AppBundle\Entity\ImageMetadata:
   itemOperations: ~
   collectionOperations:
@@ -161,6 +165,7 @@ AppBundle\Entity\ImageMetadata:
       method: 'POST'
       normalization_context:
         groups: ['create_image_metadata']
+
 AppBundle\Entity\Dictionary\IncorrectForm:
   collectionOperations:
     get:

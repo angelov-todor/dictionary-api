@@ -35,7 +35,7 @@ class EnrichAction
      * @Route(
      *     name="enrich",
      *     path="/images-enrich",
-     *     defaults={"_api_resource_class"=Enrichment::class, "_api_item_operation_name"="enrich"}
+     *     defaults={"_api_resource_class"=Enrichment::class, "_api_collection_operation_name"="enrich"}
      * )
      * @Method("GET")
      *
