@@ -55,8 +55,6 @@ AppBundle\Entity\Dictionary\Word:
         summary: "Retrieve the syllables of a word"
         consumes: ["application/json", "text/html"]
         produces: ["application/json"]
-  attributes:
-    filters: [word.search]
 
 AppBundle\Entity\Dictionary\WordType:
   collectionOperations:
@@ -66,7 +64,19 @@ AppBundle\Entity\Dictionary\WordType:
     get:
       method: 'GET'
 
-AppBundle\Entity\Metadata: ~
+AppBundle\Entity\Metadata:
+  itemOperations: ~
+  collectionOperations:
+    get:
+      method: 'GET'
+      normalization_context:
+        groups: ['list_metadata']
+    post:
+      method: 'POST'
+  attributes:
+    enable_max_depth: true
+    normalization_context:
+      groups: ['list_metadata']
 
 AppBundle\Entity\Image:
   itemOperations:
