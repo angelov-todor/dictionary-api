@@ -57,7 +57,7 @@ class EnrichAction
             ->select('m')
             ->from('AppBundle\Entity\Metadata', 'm')
             ->setMaxResults(1)
-            ->setFirstResult(rand(1, $metadataCount))
+            ->setFirstResult(rand(1, intval($metadataCount)))
             ->getQuery()
             ->getResult();
 
