@@ -34,7 +34,7 @@ final class EnrichmentContextBuilder implements SerializerContextBuilderInterfac
     ): array {
         $context = $this->decorated->createFromRequest($request, $normalization, $extractedAttributes);
 
-        if ($request->getUri() == '/images-enrich' && true === $normalization) {
+        if ($request->getPathInfo() == '/images-enrich') {
             $context['groups'][] = 'get_enrichment';
         }
 
