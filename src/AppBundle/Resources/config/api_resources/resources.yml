@@ -154,8 +154,7 @@ AppBundle\Entity\Image:
       method: 'GET'
     enrich:
       route_name: 'enrich'
-      normalization_context:
-              groups: ['get_enrichment']
+
 AppBundle\Entity\ImageMetadata:
   itemOperations: ~
   collectionOperations:
