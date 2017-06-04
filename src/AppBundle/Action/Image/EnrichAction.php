@@ -5,19 +5,30 @@ namespace AppBundle\Action\Image;
 
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Serializer;
 
 class EnrichAction
 {
     /**
-     * @var ContainerInterface
+     * @var EntityManager
      */
     protected $entityManager;
+    /**
+     * @var Serializer
+     */
+    protected $serializer;
 
-    public function __construct(EntityManager $entityManager)
+    /**
+     * EnrichAction constructor.
+     * @param EntityManager $entityManager
+     * @param Serializer $serializer
+     */
+    public function __construct(EntityManager $entityManager, Serializer $serializer)
     {
         $this->entityManager = $entityManager;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -66,6 +77,6 @@ class EnrichAction
         $obj->metadata = $randomMetadata;
         $obj->question = 'The big question?';
 
-        return $obj;
+        return new Response($this->serializer->encode($obj, 'json'));
     }
 }
