@@ -72,11 +72,10 @@ class EnrichAction
             ->getQuery()
             ->getResult();
 
-        $obj = new \stdClass();
-        $obj->image = $randomImage;
-        $obj->metadata = $randomMetadata;
-        $obj->question = 'The big question?';
-
-        return new Response($this->serializer->encode($obj, 'json'));
+        return new Response($this->serializer->encode([
+            'image' => $this->serializer->encode($randomImage, 'json-ld'),
+            'metadata' => $this->serializer->encode($randomMetadata, 'json-ld'),
+            'question' => 'The big question?'
+        ], 'json'));
     }
 }
