@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace AppBundle\Action\Image;
 
+use AppBundle\Entity\Enrichment;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Serializer;
 
@@ -34,7 +34,8 @@ class EnrichAction
     /**
      * @Route(
      *     name="enrich",
-     *     path="/images-enrich"
+     *     path="/images-enrich",
+     *     defaults={"_api_resource_class"=Enrichment::class, "_api_item_operation_name"="enrich"}
      * )
      * @Method("GET")
      *
@@ -42,40 +43,40 @@ class EnrichAction
      */
     public function __invoke()
     {
-        $em = $this->entityManager;
-
-        $imageCount = $em->createQueryBuilder()
+        $imageCount = $this->entityManager->createQueryBuilder()
             ->select('count(i.id)')
             ->from('AppBundle\Entity\Image', 'i')
             ->getQuery()
             ->getSingleScalarResult();
 
-        $randomImage = $em->createQueryBuilder()
+        $randomImage = $this->entityManager->createQueryBuilder()
             ->select('i')
             ->from('AppBundle\Entity\Image', 'i')
             ->setMaxResults(1)
-            ->setFirstResult(rand(1, intval($imageCount)))
+            ->setFirstResult(rand(0, intval($imageCount) - 1))
             ->getQuery()
-            ->getResult();
+            ->getSingleResult();
 
-        $metadataCount = $em->createQueryBuilder()
+        $metadataCount = $this->entityManager->createQueryBuilder()
             ->select('count(m)')
             ->from('AppBundle\Entity\Metadata', 'm')
             ->getQuery()
             ->getSingleScalarResult();
 
-        $randomMetadata = $em->createQueryBuilder()
+        $randomMetadata = $this->entityManager->createQueryBuilder()
             ->select('m')
             ->from('AppBundle\Entity\Metadata', 'm')
             ->setMaxResults(1)
-            ->setFirstResult(rand(1, intval($metadataCount)))
+            ->setFirstResult(rand(0, intval($metadataCount) - 1))
             ->getQuery()
-            ->getResult();
+            ->getSingleResult();
 
-        return new Response($this->serializer->encode([
-            'image' => $this->serializer->encode($randomImage, 'json-ld'),
-            'metadata' => $this->serializer->encode($randomMetadata, 'json-ld'),
-            'question' => 'The big question?'
-        ], 'json'));
+        $q = 'The big question?';
+
+        return new Enrichment(
+            $randomImage,
+            $randomMetadata,
+            $q
+        );
     }
 }
