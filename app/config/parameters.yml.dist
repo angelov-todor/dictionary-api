@@ -21,3 +21,6 @@ parameters:
     jwt_public_key_path: '%kernel.root_dir%/../var/jwt/public.pem'
     jwt_key_pass_phrase: system
     jwt_token_ttl: 3000
+
+    google_project_id: ~
+    google_key_file_path: ~

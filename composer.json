@@ -35,7 +35,8 @@
         "phpdocumentor/reflection-docblock": "^3.0",
         "friendsofsymfony/user-bundle": "2.0.x-dev",
         "lexik/jwt-authentication-bundle": "v2.2.0",
-        "liip/imagine-bundle": "2.0.x-dev"
+        "liip/imagine-bundle": "2.0.x-dev",
+        "google/cloud-vision": "v0.3.0"
     },
     "require-dev": {
         "api-platform/schema-generator": "^1.2",

@@ -77,7 +77,7 @@ class UploadAction
     {
         $image = $request->get('resource');
 
-        $path = 'assets' . DIRECTORY_SEPARATOR . $image;
+        $path = Image::IMAGE_LOCATION . DIRECTORY_SEPARATOR . $image;
         if (!file_exists($path)) {
             return new JsonResponse([
                 'location' => $path,
@@ -126,22 +126,22 @@ class UploadAction
         $json = json_decode($requestContent);
 
         $filename = $json->filename;
-        $data = $json->data;
+        $fileData = $json->data;
 
-        if (!$filename || !$data) {
+        if (!$filename || !$fileData) {
             return new JsonResponse([
                 'filename' => $filename,
-                'data' => $data,
+                'data' => $fileData,
                 'content' => $request->getContent()
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         $uuidName = $this->getToken(40) . '.' . $ext;
-        $location = 'assets' . DIRECTORY_SEPARATOR . $uuidName;
+        $location = Image::IMAGE_LOCATION . DIRECTORY_SEPARATOR . $uuidName;
         $file = getcwd() . DIRECTORY_SEPARATOR . $location;
 
         $image = new Image();
-        $this->base64ToJpeg($data, $file);
+        $this->base64ToJpeg($fileData, $file);
         $image->setSrc($uuidName);
 
         $entityManager = $this->container->get('doctrine.orm.entity_manager');

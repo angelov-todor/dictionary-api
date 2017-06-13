@@ -39,3 +39,7 @@ services:
     decorates: api_platform.serializer.context_builder
     class: AppBundle\Serializer\EnrichmentContextBuilder
     arguments: ['@app.serializer.builder.common.inner']
+
+  'AppBundle\Services\GoogleVisionService':
+    class: AppBundle\Services\GoogleVisionService
+    arguments: ['%google_project_id%','%google_key_file_path%']
