@@ -7,7 +7,6 @@ use AppBundle\Entity\Image;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,16 +29,16 @@ class UploadAction
     /**
      * @Route(
      *     name="images_upload",
-     *     path="/images-upload"
+     *     path="/images-upload",
+     *     defaults={"_api_resource_class"=Image::class, "_api_item_operation_name"="images_upload"}
      * )
      * @Method("POST")
-     *
-     * @param Request $request
+     * @param mixed $data
      * @return JsonResponse|Response|Image
      */
-    public function __invoke(Request $request)
+    public function __invoke($data)
     {
-        $requestContent = $request->getContent();
+        $requestContent = $data;
         $json = json_decode($requestContent);
 
         $filename = $json->filename;
@@ -49,7 +48,7 @@ class UploadAction
             return new JsonResponse([
                 'filename' => $filename,
                 'data' => $fileData,
-                'content' => $request->getContent()
+                'content' => $data
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
