@@ -73,8 +73,23 @@ final class ImageMetadataSubscriber implements EventSubscriberInterface
         }
         $file = getcwd() . DIRECTORY_SEPARATOR . Image::IMAGE_LOCATION . DIRECTORY_SEPARATOR . $image->getSrc();
 
+        try {
+            $metadata = $this->findMetadataByName('label');
+        } catch (\Exception $e) {
+            return;
+        }
+
         $labelDetection = $this->getVisionService()->execute($file);
-        var_dump($labelDetection);die;
+        foreach ($labelDetection as $entity) {
+            $imageMetadata = new ImageMetadata();
+            $imageMetadata->setImage($image);
+            $imageMetadata->setMetadata($metadata);
+            $imageMetadata->setValue($entity->description());
+            $this->getEntityManager()->persist($imageMetadata);
+            $this->getEntityManager()->flush($imageMetadata);
+        }
+
+        return;
 
         $metas = [
             'Фонеми' => 'phonemes',

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AppBundle\Services;
 
+use Google\Cloud\Vision\Annotation;
 use Google\Cloud\Vision\VisionClient;
 
 /**
@@ -35,7 +36,7 @@ class GoogleVisionService
 
     /**
      * @param string $fileName The name of the image file to annotate
-     * @return array
+     * @return Annotation\Entity[]|null
      */
     public function execute($fileName)
     {
