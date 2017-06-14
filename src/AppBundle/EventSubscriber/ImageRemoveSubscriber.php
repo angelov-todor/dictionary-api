@@ -33,7 +33,7 @@ final class ImageRemoveSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => [['removeImageMetadata', EventPriorities::POST_DESERIALIZE]],
+            KernelEvents::VIEW => ['removeImageMetadata', EventPriorities::PRE_WRITE],
         ];
     }
 
