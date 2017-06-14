@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AppBundle\Services;
 
+use AppBundle\Entity\Dictionary\Dictionary;
 use AppBundle\Services\Word\DoctrineAdapter;
 use Doctrine\ORM\EntityManager;
 
@@ -55,7 +56,7 @@ class WordTools
                 continue;
             }
             $qb = $this->getEntityManager()->createQueryBuilder();
-            $qb->select('d.word')->from('Application\Entity\Dictionary', 'd')
+            $qb->select('d.word')->from(Dictionary::class, 'd')
                 ->where('d.normalized like :word')
                 ->setParameter('word', $word);
 
@@ -80,6 +81,7 @@ class WordTools
         $done = [];
         $algorithm = new Transcription();
         $adapter = new DoctrineAdapter($this->getEntityManager());
+        $adapter->setEntityClassname(Dictionary::class);
         $algorithm->setAdapter($adapter);
         try {
             foreach ($wordsArray as $i => $word) {
@@ -102,6 +104,7 @@ class WordTools
         $done = [];
         $algorithm = new Transcription();
         $adapter = new DoctrineAdapter($this->getEntityManager());
+        $adapter->setEntityClassname(Dictionary::class);
         $algorithm->setAdapter($adapter);
         try {
             foreach ($wordsArray as $i => $word) {
@@ -124,6 +127,7 @@ class WordTools
         $done = [];
         $algorithm = new Transcription();
         $adapter = new DoctrineAdapter($this->getEntityManager());
+        $adapter->setEntityClassname(Dictionary::class);
         $algorithm->setAdapter($adapter);
         try {
             foreach ($wordsArray as $i => $word) {

@@ -105,25 +105,4 @@ class Reduction extends Phonemes
         $map = $this->reductionTable[$char];
         return $map[$position];
     }
-
-    /**
-     * Self testing mechanism
-     */
-    public function selfTest()
-    {
-        $words = include 'tests/reduction.php';
-        foreach ($words as $word => $expected) {
-            $reduct = $this->reduct($word);
-            if (false === $reduct) {
-                echo sprintf("Fail at word: %s not found in database", $word), PHP_EOL;
-                continue;
-            }
-            $isOk = false;
-            if ($this->toLowerCase($reduct) == $this->toLowerCase($expected)) {
-                $isOk = true;
-            }
-            echo sprintf("%s at word: %s got reduction [%s] expected: [%s]",
-                ($isOk ? "OK" : "Fail"), $word, $reduct, $expected), PHP_EOL;
-        }
-    }
 }

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace AppBundle\Action\Dictionary;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use AppBundle\Services\Rhymeform;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,12 +18,13 @@ class RhymeformAction
      *     defaults={"_api_resource_class"=Word::class, "_api_item_operation_name"="rhymeform"}
      * )
      * @Method("GET")
+     * @param mixed $data
      * @return mixed
      */
     public function __invoke($data)
     {
         /* @var $data Word */
-        $rhymeform = \AppBundle\Services\Rhymeform::findRhymeform($data->getName());
+        $rhymeform = Rhymeform::findRhymeform($data->getName());
         return new JsonResponse([
             'rhymeform' => $rhymeform
         ]);

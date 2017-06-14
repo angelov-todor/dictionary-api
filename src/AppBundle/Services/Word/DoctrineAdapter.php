@@ -3,13 +3,15 @@ declare(strict_types=1);
 
 namespace AppBundle\Services\Word;
 
+use Doctrine\ORM\EntityManager;
+
 class DoctrineAdapter implements AdapterInterface
 {
     protected $entityManager;
 
     protected $entityClassname;
 
-    public function __construct(\Doctrine\ORM\EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
     }
@@ -25,14 +27,14 @@ class DoctrineAdapter implements AdapterInterface
     }
 
     /**
-     * @return \Doctrine\ORM\EntityManager
+     * @return EntityManager
      */
     protected function getEntityManager()
     {
         return $this->entityManager;
     }
 
-    public function setEntityManager(\Doctrine\ORM\EntityManager $entityManager)
+    public function setEntityManager(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
         return $this;
@@ -47,7 +49,6 @@ class DoctrineAdapter implements AdapterInterface
 
         $query = $qb->getQuery();
         $found = $query->getOneOrNullResult();
-//        if ($found instanceof \Application\Entity\Dictionary) {
         if ($found instanceof $this->entityClassname) {
             return $found->getArrayCopy();
         }

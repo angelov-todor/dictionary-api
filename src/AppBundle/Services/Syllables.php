@@ -227,4 +227,13 @@ class Syllables extends Word
 
         return $output;
     }
+
+    /**
+     * @param $char
+     * @return mixed
+     */
+    protected function isVowel($char)
+    {
+       return false;
+    }
 }

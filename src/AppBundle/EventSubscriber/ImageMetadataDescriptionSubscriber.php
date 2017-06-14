@@ -86,13 +86,17 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
             }
 
             $imageMetadata->setMetadata($metadata);
-            $imageMetadata->setValue(
-                $this->getValueFromTool($tool, $imageMetadata->getValue())
-            );
-
-            $this->getEntityManager()->persist($imageMetadata);
-            $this->getEntityManager()->flush($imageMetadata);
+            try {
+                $imageMetadata->setValue(
+                    $this->getValueFromTool($tool, $imageMetadata->getValue())
+                );
+                $this->getEntityManager()->persist($imageMetadata);
+                $this->getEntityManager()->flush($imageMetadata);
+            } catch (\Exception $e) {
+                continue;
+            }
         }
+
         return null;
     }
 
