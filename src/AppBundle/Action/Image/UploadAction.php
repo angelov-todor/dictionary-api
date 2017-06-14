@@ -120,7 +120,7 @@ class UploadAction
      * @param Request $request
      * @return JsonResponse|Response|Image
      */
-    public function imageUploadAction(Request $request): Response
+    public function imageUploadAction(Request $request)
     {
         $requestContent = $request->getContent();
         $json = json_decode($requestContent);
@@ -147,7 +147,7 @@ class UploadAction
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $entityManager->persist($image);
         $entityManager->flush($image);
-
+        return $image;
         return new JsonResponse($image, Response::HTTP_CREATED);
     }
 

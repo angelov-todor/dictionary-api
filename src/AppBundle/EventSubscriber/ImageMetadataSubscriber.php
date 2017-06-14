@@ -68,7 +68,6 @@ final class ImageMetadataSubscriber implements EventSubscriberInterface
         $image = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        echo "Asdads\n";
         if (!$image instanceof Image || Request::METHOD_POST !== $method) {
             return;
         }
