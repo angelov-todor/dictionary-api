@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UploadAction
@@ -60,6 +62,7 @@ class UploadAction
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $entityManager->persist($image);
         $entityManager->flush($image);
+
         return $image;
     }
 

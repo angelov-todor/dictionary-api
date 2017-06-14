@@ -71,12 +71,10 @@ class EnrichAction
             ->getQuery()
             ->getSingleResult();
 
-        $q = 'The big question?';
-
         return new Enrichment(
             $randomImage,
             $randomMetadata,
-            $q
+            ''
         );
     }
 }

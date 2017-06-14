@@ -10,6 +10,7 @@ use AppBundle\Entity\Metadata;
 use AppBundle\Services\GoogleVisionService;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -63,13 +64,13 @@ final class ImageMetadataSubscriber implements EventSubscriberInterface
         return $this->entityManager;
     }
 
-    public function generateMetadata(GetResponseForControllerResultEvent $event)
+    public function generateMetadata(GetResponseForControllerResultEvent $event):?JsonResponse
     {
         $image = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
         if (!$image instanceof Image || Request::METHOD_POST !== $method) {
-            return;
+            return null;
         }
 
         $file = getcwd() . DIRECTORY_SEPARATOR . Image::IMAGE_LOCATION . DIRECTORY_SEPARATOR . $image->getSrc();
@@ -77,7 +78,7 @@ final class ImageMetadataSubscriber implements EventSubscriberInterface
         try {
             $metadata = $this->findMetadataByName('label');
         } catch (\Exception $e) {
-            return;
+            return null;
         }
 
         $labelDetection = $this->getVisionService()->execute($file);
@@ -90,7 +91,7 @@ final class ImageMetadataSubscriber implements EventSubscriberInterface
             $this->getEntityManager()->flush($imageMetadata);
         }
 
-        return;
+        return new JsonResponse(['@id' => 'images/' . $image->getId()]);
 
         $metas = [
             'Фонеми' => 'phonemes',
