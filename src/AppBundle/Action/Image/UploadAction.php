@@ -4,13 +4,10 @@ declare(strict_types=1);
 namespace AppBundle\Action\Image;
 
 use AppBundle\Entity\Image;
-use AppBundle\Entity\ImageUpload;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
-use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UploadAction
@@ -33,13 +30,13 @@ class UploadAction
      * @Route(
      *     name="images_upload",
      *     path="/images-upload",
-     *     defaults={"_api_resource_class"=ImageUpload::class, "_api_collection_operation_name"="images_upload"}
+     *     defaults={"_api_resource_class"=Image::class, "_api_collection_operation_name"="images_upload"}
      * )
      * @Method("POST")
      * @param mixed $data
      * @return JsonResponse|Response|Image
      */
-    public function __invoke(ImageUpload $data)
+    public function __invoke(Image $data)
     {
         $filename = $data->getFilename();
         $fileData = $data->getData();

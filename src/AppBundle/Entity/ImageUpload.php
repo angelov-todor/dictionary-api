@@ -8,9 +8,6 @@ use ApiPlatform\Core\Annotation\ApiResource;
 /**
  * Class Enrichment
  * @package AppBundle\Entity
- * @ApiResource(
- *     collectionOperations={"images_upload"={"route_name"="images_upload"}}
- * )
  */
 class ImageUpload
 {
