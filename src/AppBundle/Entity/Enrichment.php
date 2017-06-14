@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * Class Enrichment
  * @package AppBundle\Entity
  * @ApiResource(
- *     collectionOperations={}, itemOperations={"get"={"method"="GET"}},
+ *     collectionOperations={"enrich"={"route_name"="enrich"}}, itemOperations={"get"={"method"="GET"}},
  *     attributes={"normalization_context"={"groups"={"get_enrichment"}}}
  * )
  */
