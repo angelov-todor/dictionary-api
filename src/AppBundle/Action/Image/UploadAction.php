@@ -60,8 +60,7 @@ class UploadAction
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $entityManager->persist($image);
         $entityManager->flush($image);
-//        return $image;
-        return new JsonResponse(['@id' => 'images/' . $image->getId()], Response::HTTP_CREATED);
+        return $image;
     }
 
     /**
