@@ -157,8 +157,6 @@ AppBundle\Entity\Image:
   collectionOperations:
     get:
       method: 'GET'
-    enrich:
-      route_name: 'enrich'
 
 AppBundle\Entity\ImageMetadata:
   itemOperations: ~
