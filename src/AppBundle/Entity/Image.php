@@ -119,36 +119,24 @@ class Image
     }
 
     /**
-     * @param Collection $meta
+     * @param ImageMetadata $imageMetadata
      * @return Image
      */
-    public function addImageMetadata(Collection $meta): Image
+    public function addImageMetadata(ImageMetadata $imageMetadata): Image
     {
-        foreach ($meta as $iMeta) {
-            $this->imageMetadata[] = $iMeta;
-        }
+        $imageMetadata->setImage($this);
+        $this->imageMetadata->add($imageMetadata);
         return $this;
     }
 
     /**
-     * @param ImageMetadata $meta
+     * @param ImageMetadata $imageMetadata
      * @return Image
      */
-    public function addMetadata(ImageMetadata $meta): Image
+    public function removeImageMetadata(ImageMetadata $imageMetadata): Image
     {
-        $this->imageMetadata[] = $meta;
-        return $this;
-    }
-
-    /**
-     * @param Collection $meta
-     * @return Image
-     */
-    public function removeImageMetadata(Collection $meta): Image
-    {
-        foreach ($meta as $iMeta) {
-            $this->imageMetadata->removeElement($iMeta);
-        }
+        $this->imageMetadata->removeElement($imageMetadata);
+        $imageMetadata->setImage(null);
         return $this;
     }
 

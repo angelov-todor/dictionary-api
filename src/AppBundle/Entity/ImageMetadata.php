@@ -85,7 +85,11 @@ class ImageMetadata
         return $this->image;
     }
 
-    public function setImage(Image $image): ImageMetadata
+    /**
+     * @param Image|null $image
+     * @return ImageMetadata
+     */
+    public function setImage(?Image $image): ImageMetadata
     {
         $this->image = $image;
         return $this;
