@@ -87,6 +87,8 @@ AppBundle\Entity\Image:
         groups: ['get_image']
     delete:
       method: 'DELETE'
+      normalization_context:
+        groups: ['get_image']
     images_search:
       route_name: 'images_search'
       swagger_context:
