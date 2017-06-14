@@ -41,7 +41,7 @@ class Image
     /**
      * @var ImageMetadata
      *
-     * @ORM\OneToMany(targetEntity="ImageMetadata", mappedBy="image", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="ImageMetadata", mappedBy="image", cascade={"remove"}, orphanRemoval=true)
      * @Groups({"get_image"})
      */
     protected $imageMetadata;
