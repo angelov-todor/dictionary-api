@@ -38,8 +38,7 @@ class UploadAction
      */
     public function __invoke($data)
     {
-        $requestContent = $data;
-        $json = json_decode($requestContent);
+        $json = $data;
 
         $filename = $json->filename;
         $fileData = $json->data;
@@ -48,7 +47,7 @@ class UploadAction
             return new JsonResponse([
                 'filename' => $filename,
                 'data' => $fileData,
-                'content' => $data
+                'content' => json_encode($data)
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
