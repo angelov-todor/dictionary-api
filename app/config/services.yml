@@ -47,3 +47,7 @@ services:
   'AppBundle\Services\GoogleVisionService':
     class: AppBundle\Services\GoogleVisionService
     arguments: ['%google_project_id%','%google_key_file_path%']
+
+  'AppBundle\Services\WordTools':
+    class: AppBundle\Services\WordTools
+    arguments: ['@doctrine.orm.entity_manager']

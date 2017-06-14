@@ -18,6 +18,12 @@ abstract class Word
     protected $adapterInterface = null;
 
     /**
+     * @param $char
+     * @return mixed
+     */
+    abstract protected function isVowel($char);
+
+    /**
      * Find the stressed vowel within word presented as array
      * @param array $chars The characters of the word
      * @return int The position of the stressed vowel. FALSE if no stressed vowel found.
