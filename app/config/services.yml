@@ -25,6 +25,10 @@ services:
     class: 'AppBundle\Action\Image\UploadAction'
     arguments: [ '@service_container' ]
 
+  'AppBundle\Action\Image\DynamicImageAction':
+    class: 'AppBundle\Action\Image\DynamicImageAction'
+    arguments: [ '@service_container' ]
+
   'AppBundle\Action\Image\EnrichAction':
     class: 'AppBundle\Action\Image\EnrichAction'
     arguments: [ '@doctrine.orm.entity_manager', '@api_platform.serializer' ]
