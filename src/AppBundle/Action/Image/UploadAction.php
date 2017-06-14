@@ -39,16 +39,14 @@ class UploadAction
      */
     public function __invoke(ImageUpload $data)
     {
-
-
-        $filename = $json->filename;
-        $fileData = $json->data;
+        $filename = $data->getFilename();
+        $fileData = $data->getData();
 
         if (!$filename || !$fileData) {
+            var_dump($data);die;
             return new JsonResponse([
                 'filename' => $filename,
-                'data' => $fileData,
-                'content' => json_encode($data)
+                'data' => $fileData
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
