@@ -4,11 +4,8 @@ declare(strict_types=1);
 namespace AppBundle\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
-use AppBundle\Entity\Image;
 use AppBundle\Entity\ImageMetadata;
 use AppBundle\Entity\Metadata;
-use AppBundle\Services\GoogleVisionService;
-use AppBundle\Services\Word;
 use AppBundle\Services\WordTools;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -94,6 +91,7 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
             );
 
             $this->getEntityManager()->persist($imageMetadata);
+            $this->getEntityManager()->flush($imageMetadata);
         }
         return null;
     }
