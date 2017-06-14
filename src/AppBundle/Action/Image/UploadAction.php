@@ -43,7 +43,6 @@ class UploadAction
         $fileData = $data->getData();
 
         if (!$filename || !$fileData) {
-            var_dump($data);die;
             return new JsonResponse([
                 'filename' => $filename,
                 'data' => $fileData
@@ -61,8 +60,8 @@ class UploadAction
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $entityManager->persist($image);
         $entityManager->flush($image);
-        return $image;
-//        return new JsonResponse($image, Response::HTTP_CREATED);
+//        return $image;
+        return new JsonResponse(['@id' => 'images/' . $image->getId()], Response::HTTP_CREATED);
     }
 
     /**
