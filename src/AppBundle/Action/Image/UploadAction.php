@@ -30,7 +30,7 @@ class UploadAction
      * @Route(
      *     name="images_upload",
      *     path="/images-upload",
-     *     defaults={"_api_resource_class"=Image::class, "_api_item_operation_name"="images_upload"}
+     *     defaults={"_api_resource_class"=Image::class, "_api_collection_operation_name"="images_upload"}
      * )
      * @Method("POST")
      * @param mixed $data
