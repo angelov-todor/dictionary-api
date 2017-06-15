@@ -49,9 +49,6 @@ class DoctrineAdapter implements AdapterInterface
 
         $query = $qb->getQuery();
         $found = $query->getOneOrNullResult();
-        if ($found instanceof $this->entityClassname) {
-            return $found->getArrayCopy();
-        }
 
         return $found;
     }
