@@ -129,13 +129,14 @@ liip_imagine:
         # create a thumbnail: set size to 120x90 and use the "outbound" mode
         # to crop the image when the size ratio of the input differs
         thumbnail: { size: [120, 90], mode: inset, allow_upscale: true }
-        background: { size: [120, 90], position: center, transparency: 1}
+        background: { size: [120, 90], position: center, transparency: 1 }
     large:
       # list of transformations to apply (the "filters")
       filters:
         # create a thumbnail: set size to 120x90 and use the "outbound" mode
         # to crop the image when the size ratio of the input differs
         thumbnail: { size: [640, 480], mode: inset, allow_upscale: true }
+        background: { size: [640, 480], position: center, transparency: 1 }
 #  loaders:
 #    default:
 #      filesystem:
