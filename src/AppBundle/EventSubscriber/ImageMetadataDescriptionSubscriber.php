@@ -69,11 +69,13 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
         $method = $event->getRequest()->getMethod();
 
         if (!$imageMetadata instanceof ImageMetadata || Request::METHOD_POST !== $method) {
+            $this->logger->debug("Type: " . get_class($imageMetadata) . "; Method: " . $method);
             return null;
         }
         if ($imageMetadata->getMetadata()->getName() != 'Description'
             || $imageMetadata->getMetadata()->getName() != 'Описание'
         ) {
+            $this->logger->debug("Name: " . $imageMetadata->getMetadata()->getName());
             return null;
         }
         $this->logger->debug('starting.');
