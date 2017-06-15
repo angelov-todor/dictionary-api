@@ -8,6 +8,7 @@ use AppBundle\Entity\ImageMetadata;
 use AppBundle\Entity\Metadata;
 use AppBundle\Services\WordTools;
 use Doctrine\ORM\EntityManager;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,14 +28,21 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
     protected $wordTools;
 
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * ImageMetadataSubscriber constructor.
      * @param EntityManager $entityManager
      * @param WordTools $wordTools
+     * @param LoggerInterface $logger
      */
-    public function __construct(EntityManager $entityManager, WordTools $wordTools)
+    public function __construct(EntityManager $entityManager, WordTools $wordTools, LoggerInterface $logger)
     {
         $this->entityManager = $entityManager;
         $this->wordTools = $wordTools;
+        $this->logger = $logger;
     }
 
     /**
@@ -68,6 +76,7 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
         ) {
             return null;
         }
+        $this->logger->debug('starting.');
 
         $metas = [
             'Фонеми' => 'phonemes',
@@ -82,6 +91,7 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
             try {
                 $metadata = $this->findMetadataByName($meta);
             } catch (\Exception $e) {
+                $this->logger->debug($e->getMessage());
                 continue;
             }
 
@@ -93,6 +103,7 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
                 $this->getEntityManager()->persist($imageMetadataO);
                 $this->getEntityManager()->flush($imageMetadataO);
             } catch (\Exception $e) {
+                $this->logger->debug($e->getMessage());
                 continue;
             }
         }
