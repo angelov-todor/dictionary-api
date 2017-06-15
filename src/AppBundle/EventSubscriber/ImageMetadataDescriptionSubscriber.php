@@ -8,7 +8,6 @@ use AppBundle\Entity\ImageMetadata;
 use AppBundle\Entity\Metadata;
 use AppBundle\Services\WordTools;
 use Doctrine\ORM\EntityManager;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,22 +27,14 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
     protected $wordTools;
 
     /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-
-    /**
      * ImageMetadataSubscriber constructor.
      * @param EntityManager $entityManager
      * @param WordTools $wordTools
-     * @param LoggerInterface $logger
      */
-    public function __construct(EntityManager $entityManager, WordTools $wordTools, LoggerInterface $logger)
+    public function __construct(EntityManager $entityManager, WordTools $wordTools)
     {
         $this->entityManager = $entityManager;
         $this->wordTools = $wordTools;
-        $this->logger = $logger;
-        $this->logger->critical('construct');
     }
 
     /**
@@ -70,16 +61,13 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
         $method = $event->getRequest()->getMethod();
 
         if (!$imageMetadata instanceof ImageMetadata || Request::METHOD_POST !== $method) {
-            $this->logger->debug("Type: " . get_class($imageMetadata) . "; Method: " . $method);
             return null;
         }
         if ($imageMetadata->getMetadata()->getName() != 'Description'
             && $imageMetadata->getMetadata()->getName() != 'Описание'
         ) {
-            $this->logger->debug("Name: " . $imageMetadata->getMetadata()->getName());
             return null;
         }
-        $this->logger->debug('starting.');
 
         $metas = [
             'Фонеми' => 'phonemes',
@@ -94,7 +82,6 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
             try {
                 $metadata = $this->findMetadataByName($meta);
             } catch (\Exception $e) {
-                $this->logger->debug($e->getMessage());
                 continue;
             }
 
@@ -106,7 +93,6 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
                 $this->getEntityManager()->persist($imageMetadataO);
                 $this->getEntityManager()->flush($imageMetadataO);
             } catch (\Exception $e) {
-                $this->logger->debug($e->getMessage());
                 continue;
             }
         }
