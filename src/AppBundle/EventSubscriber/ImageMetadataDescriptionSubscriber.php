@@ -74,7 +74,7 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
             return null;
         }
         if ($imageMetadata->getMetadata()->getName() != 'Description'
-            || $imageMetadata->getMetadata()->getName() != 'Описание'
+            && $imageMetadata->getMetadata()->getName() != 'Описание'
         ) {
             $this->logger->debug("Name: " . $imageMetadata->getMetadata()->getName());
             return null;
