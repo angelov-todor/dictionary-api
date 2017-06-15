@@ -43,6 +43,7 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
         $this->entityManager = $entityManager;
         $this->wordTools = $wordTools;
         $this->logger = $logger;
+        $this->logger->critical('construct');
     }
 
     /**
@@ -51,7 +52,7 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::VIEW => [['generateMetadata', EventPriorities::POST_WRITE]],
+            KernelEvents::VIEW => [['additionalMetadata', EventPriorities::POST_WRITE]],
         ];
     }
 
@@ -63,7 +64,7 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
         return $this->entityManager;
     }
 
-    public function generateMetadata(GetResponseForControllerResultEvent $event):?JsonResponse
+    public function additionalMetadata(GetResponseForControllerResultEvent $event):?JsonResponse
     {
         $imageMetadata = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();

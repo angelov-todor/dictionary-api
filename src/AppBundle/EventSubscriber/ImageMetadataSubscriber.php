@@ -92,31 +92,6 @@ final class ImageMetadataSubscriber implements EventSubscriberInterface
         }
 
         return new JsonResponse(['@id' => 'images/' . $image->getId()]);
-
-        $metas = [
-            'Фонеми' => 'phonemes',
-            'Сричкоделение' => 'syllables',
-            'Римоформа' => 'rhymeform',
-            'Транскрипция' => 'transcription'
-        ];
-
-        foreach ($metas as $meta => $tool) {
-            $imageMetadata = new ImageMetadata();
-            $imageMetadata->setImage($image);
-            try {
-                $metadata = $this->findMetadataByName($meta);
-            } catch (\Exception $e) {
-                continue;
-            }
-
-            $imageMetadata->setMetadata($metadata);
-            $imageMetadata->setValue(
-                $this->getValueFromTool($tool, $image->getDescription())
-            );
-
-            $this->getEntityManager()->persist($imageMetadata);
-        }
-
     }
 
     /**
@@ -133,15 +108,5 @@ final class ImageMetadataSubscriber implements EventSubscriberInterface
             throw new \Exception("No metadata with name $name");
         }
         return $meta;
-    }
-
-    /**
-     * @param string $tool
-     * @param string $word
-     * @return string
-     */
-    protected function getValueFromTool($tool, $word)
-    {
-        return $this->getWordTools()->{$tool}($word);
     }
 }
