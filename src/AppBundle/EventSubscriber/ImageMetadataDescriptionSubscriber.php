@@ -77,21 +77,21 @@ final class ImageMetadataDescriptionSubscriber implements EventSubscriberInterfa
         ];
 
         foreach ($metas as $meta => $tool) {
-            $imageMetadata = new ImageMetadata();
-            $imageMetadata->setImage($imageMetadata->getImage());
+            $imageMetadataO = new ImageMetadata();
+            $imageMetadataO->setImage($imageMetadata->getImage());
             try {
                 $metadata = $this->findMetadataByName($meta);
             } catch (\Exception $e) {
                 continue;
             }
 
-            $imageMetadata->setMetadata($metadata);
+            $imageMetadataO->setMetadata($metadata);
             try {
-                $imageMetadata->setValue(
+                $imageMetadataO->setValue(
                     $this->getValueFromTool($tool, $imageMetadata->getValue())
                 );
-                $this->getEntityManager()->persist($imageMetadata);
-                $this->getEntityManager()->flush($imageMetadata);
+                $this->getEntityManager()->persist($imageMetadataO);
+                $this->getEntityManager()->flush($imageMetadataO);
             } catch (\Exception $e) {
                 continue;
             }
